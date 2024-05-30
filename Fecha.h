@@ -18,4 +18,5 @@ public:
     void setMes(int mes);
     void setAnio(int anio);
     string toString();
+    void cargar();
 };

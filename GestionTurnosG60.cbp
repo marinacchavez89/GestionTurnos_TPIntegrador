@@ -32,7 +32,27 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Admin.cpp" />
+		<Unit filename="Admin.h" />
 		<Unit filename="AppManager.h" />
+		<Unit filename="Especialidad.cpp" />
+		<Unit filename="Especialidad.h" />
+		<Unit filename="EstadoTurno.cpp" />
+		<Unit filename="EstadoTurno.h" />
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h" />
+		<Unit filename="Hora.cpp" />
+		<Unit filename="Hora.h" />
+		<Unit filename="HorariosProfesionales.cpp" />
+		<Unit filename="HorariosProfesionales.h" />
+		<Unit filename="Paciente.cpp" />
+		<Unit filename="Paciente.h" />
+		<Unit filename="Persona.cpp" />
+		<Unit filename="Persona.h" />
+		<Unit filename="Profesional.cpp" />
+		<Unit filename="Profesional.h" />
+		<Unit filename="Turno.cpp" />
+		<Unit filename="Turno.h" />
 		<Unit filename="funciones.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>

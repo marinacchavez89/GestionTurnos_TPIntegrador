@@ -7,11 +7,16 @@
 #include <ctime>
 #include <conio.h>
 #include <windows.h>
+#include "ProfesionalArchivo.h"
+#include "Profesional.h"
+
+using namespace std;
 
 class AppManager
 {
 private:
-
+    ProfesionalArchivo archiProf;
+    Profesional profesional;
 public:
     void configurarConsola();
     void dibujarEncabezado();
@@ -80,8 +85,8 @@ void AppManager::menuPrincipal()
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "|                               MENU PRINCIPAL                                 |" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
-        cout << "1- xxx " << endl;
-        cout << "2- xxx" << endl;
+        cout << "1- Cargar profesional" << endl;
+        cout << "2- Listar profesionales" << endl;
         cout << "3- xxx" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
@@ -92,14 +97,30 @@ void AppManager::menuPrincipal()
         switch(opcion)
         {
         case 1:
-            //Llamar a la funcion correspondiente.
+        {
+            Profesional profesional;
+            profesional.cargar();
+            if (archiProf.grabarRegistro(profesional))
+            {
+                cout << "Profesional guardado exitosamente." << endl;
+            }
+            else
+            {
+                cout << "Error al guardar el profesional." << endl;
+            }
             system("pause");
             break;
+        }
 
         case 2:
-            //Llamar a la funcion correspondiente.
+        {
+            if (!archiProf.listarRegistros())
+            {
+                std::cout << "Error al listar los profesionales." << std::endl;
+            }
             system("pause");
             break;
+        }
 
         case 3:
             //Llamar a la funcion correspondiente.

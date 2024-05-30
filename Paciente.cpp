@@ -10,17 +10,16 @@ Paciente::Paciente()
 }
 
 ///CONSTRUCTOR CON SUS PARAMETROS
-Paciente::Paciente(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero,
+Paciente::Paciente(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero, bool estado,
                    int nroHistoriaClinica, float porcCobertura, string email)
-    : Persona(dni, nombre, apellido, fechaNacimiento, edad, direccion, telefono, genero),
+    : Persona(dni, nombre, apellido, fechaNacimiento, edad, direccion, telefono, genero, estado),
       NroHistoriaClinica(nroHistoriaClinica), PorcCobertura(porcCobertura)
 {
     setEmail(email);
 }
 
 
-///GETTERS{
-
+///GETTERS
 int Paciente::getNroHistoriaClinica()
 {
     return NroHistoriaClinica;

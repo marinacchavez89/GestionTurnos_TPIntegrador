@@ -14,7 +14,7 @@ private:
 public:
     /// CONSTRUCTOR
     Paciente();
-    Paciente(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero,
+    Paciente(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero, bool estado,
              int nroHistoriaClinica, float porcCobertura, string email);
 
     /// GETTERS

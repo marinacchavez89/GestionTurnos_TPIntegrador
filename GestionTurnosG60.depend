@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1716586569 source:c:\users\marina_chavez\desktop\gestionturnosg60\main.cpp
+1717034841 source:c:\users\marina_chavez\desktop\gestionturnosg60\main.cpp
 	<iostream>
 	<locale.h>
 	<cstring>
@@ -16,27 +16,29 @@
 	<conio.h>
 	<windows.h>
 
-1716820637 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
+1717034952 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
 	<iostream>
 	<locale.h>
 	<cstring>
 	<ctime>
 	<conio.h>
 	<windows.h>
+	"ProfesionalArchivo.h"
+	"Profesional.h"
 
-1716820596 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
+1717031923 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1716820648 c:\users\marina_chavez\desktop\gestionturnosg60\fecha.h
+1717031793 c:\users\marina_chavez\desktop\gestionturnosg60\fecha.h
 	<string>
 
-1716820624 source:c:\users\marina_chavez\desktop\gestionturnosg60\persona.cpp
+1717028857 source:c:\users\marina_chavez\desktop\gestionturnosg60\persona.cpp
 	<iostream>
 	<cstring>
 	"Persona.h"
 
-1716820699 c:\users\marina_chavez\desktop\gestionturnosg60\persona.h
+1717031047 c:\users\marina_chavez\desktop\gestionturnosg60\persona.h
 	<cstring>
 	"Fecha.h"
 
@@ -46,22 +48,23 @@
 
 1716820683 c:\users\marina_chavez\desktop\gestionturnosg60\hora.h
 
-1716820630 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesional.cpp
+1717033754 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesional.cpp
+	<iostream>
 	<cstring>
 	"Profesional.h"
 	<string>
 
-1716820703 c:\users\marina_chavez\desktop\gestionturnosg60\profesional.h
+1717029081 c:\users\marina_chavez\desktop\gestionturnosg60\profesional.h
 	"Persona.h"
 	<string>
 	"Hora.h"
 
-1716830010 source:c:\users\marina_chavez\desktop\gestionturnosg60\paciente.cpp
+1717030598 source:c:\users\marina_chavez\desktop\gestionturnosg60\paciente.cpp
 	"Paciente.h"
 	<cstring>
 	<iostream>
 
-1716820691 c:\users\marina_chavez\desktop\gestionturnosg60\paciente.h
+1717029031 c:\users\marina_chavez\desktop\gestionturnosg60\paciente.h
 	"Persona.h"
 	<string>
 	"Hora.h"
@@ -107,4 +110,13 @@
 	"HorariosProfesionales.h"
 	<string>
 	"Hora.h"
+
+1717034203 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalarchivo.cpp
+	<iostream>
+	<cstring>
+	"ProfesionalArchivo.h"
+	"Profesional.h"
+
+1717032941 c:\users\marina_chavez\desktop\gestionturnosg60\profesionalarchivo.h
+	"Profesional.h"
 

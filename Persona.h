@@ -2,9 +2,6 @@
 #include <cstring>
 #include "Fecha.h"
 
-using namespace std;
-
-
 class Persona
 {
 private:
@@ -16,10 +13,11 @@ private:
     char Direccion[50];
     char Telefono[18];
     char Genero;
+    bool Estado;
 public:
     ///CONSTRUCTORES
     Persona();
-    Persona(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero);
+    Persona(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero, bool estado);
     ///SETTERS
     void setDni(int dni);
     void setNombre(string nombre);
@@ -29,6 +27,7 @@ public:
     void setDireccion(string direccion);
     void setTelefono(string telefono);
     void setGenero(char genero);
+    void setEstado(bool estado);
     ///GETTERS
     int getDni();
     string getNombre();
@@ -38,4 +37,5 @@ public:
     string getDireccion();
     string getTelefono();
     char getGenero();
+    bool getEstado();
 };

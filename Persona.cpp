@@ -15,9 +15,10 @@ Persona::Persona()
     strcpy(Direccion, "");
     strcpy(Telefono, "");
     Genero = 'M';
+    Estado = true;
 }
 
-Persona::Persona(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero)
+Persona::Persona(int dni, string nombre, string apellido, Fecha fechaNacimiento, int edad, string direccion, string telefono, char genero, bool estado)
 {
     setDni(dni);
     setNombre(nombre);
@@ -27,6 +28,7 @@ Persona::Persona(int dni, string nombre, string apellido, Fecha fechaNacimiento,
     setDireccion(direccion);
     setTelefono(telefono);
     setGenero(genero);
+    setEstado(estado);
 }
 
 void Persona::setDni(int dni)
@@ -142,6 +144,16 @@ void Persona::setGenero(char genero)
 char Persona::getGenero()
 {
     return Genero;
+}
+
+void Persona::setEstado(bool estado)
+{
+    Estado = estado;
+}
+
+bool Persona::getEstado()
+{
+    return Estado;
 }
 
 

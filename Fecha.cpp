@@ -51,3 +51,13 @@ string Fecha::toString()
 {
     return to_string(Dia) + "/" + to_string(Mes) + "/" + to_string(Anio);
 }
+
+void Fecha::cargar()
+{
+    cout<<"Ingrese dia: ";
+    cin>>Dia;
+    cout<<"Ingrese mes: ";
+    cin>>Mes;
+    cout<<"Ingrese anio: ";
+    cin>>Anio;
+}
