@@ -9,16 +9,21 @@
 #include <windows.h>
 #include "ProfesionalArchivo.h"
 #include "ProfesionalManager.h"
+#include "EspecialidadArchivo.h"
+#include "EspecialidadManager.h"
 
 using namespace std;
 
 class AppManager{
 private:
     ProfesionalArchivo archiProf;
-    ProfesionalManager manager;
+    ProfesionalManager managerProfesional;
+    EspecialidadArchivo archiEspe;
+    EspecialidadManager managerEspecialidad;
 public:
     void configurarConsola();
     void dibujarEncabezado();
+    void dibujarAdios();
     void menuABMTurnos();
     void menuABMProfesionales();
     void menuABMPacientes();
@@ -67,6 +72,12 @@ void AppManager::dibujarEncabezado(){
     for(int i = 0; i < 80; ++i)
     std::cout << "-";
     std::cout << std::endl;
+}
+void AppManager::dibujarAdios(){
+    cout << endl;
+    cout << "********************************************************************************" << endl;
+    cout << "|                                      ¡ADIÓS!                                 |" << endl;
+    cout << "********************************************************************************" << endl;
 }
 void AppManager::errorOpcion(){
     cout<<"Ingrese una opción correcta del menu."<<endl;
@@ -140,26 +151,29 @@ void AppManager::menuABMProfesionales(){
         switch(opcionProfesionales)
         {
         case 1:
-        {
-            manager.agregar();
+            managerProfesional.agregar();
+            system("pause");
             break;
-        }
         case 2:
-            manager.modificar();
+            managerProfesional.modificar();
+            system("pause");
             break;
         case 3:
-            manager.eliminar();
+            managerProfesional.eliminar();
+            system("pause");
             break;
         case 4:
-        {
-            manager.listar();
+            managerProfesional.listar();
+            system("pause");
             break;
-        }
         case 5:
             //Llamar a la funcion correspondiente.
             break;
         case 0:
             menuPrincipal();
+            break;
+        default:
+            errorOpcion();
             break;
         }
     }
@@ -234,19 +248,24 @@ void AppManager::menuABMEspecialidades(){
         switch(opcionEspecialidades)
         {
         case 1:
-            //Llamar a la funcion correspondiente.
+            managerEspecialidad.agregar();
+            system("pause");
             break;
         case 2:
-            //Llamar a la funcion correspondiente.
+            managerEspecialidad.modificar();
+            system("pause");
             break;
         case 3:
-            //Llamar a la funcion correspondiente.
+            managerEspecialidad.eliminar();
+            system("pause");
             break;
         case 4:
-            //Llamar a la funcion correspondiente.
+            managerEspecialidad.listar();
+            system("pause");
             break;
         case 5:
             //Llamar a la funcion correspondiente.
+            system("pause");
             break;
         case 0:
             menuPrincipal();
@@ -363,6 +382,9 @@ void AppManager::menuPrincipal(){
         case 5:
             menuABMAgendaProfesionales();
             system("pause");
+            break;
+        case 0:
+            dibujarAdios();
             break;
         default:
             errorOpcion();

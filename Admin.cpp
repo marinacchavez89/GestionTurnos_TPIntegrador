@@ -4,13 +4,13 @@
 using namespace std;
 
 /// CONSTRUCTOR VACIO
-Admin::Admin() : Dni(0), Rol(0)
+Admin::Admin() : Dni(0), Rol(0), Estado()
 {
 
 }
 
 /// CONSTRUCTOR CON PARAMETROS
-Admin::Admin(int dni, int rol) : Dni(dni), Rol(rol)
+Admin::Admin(int dni, int rol, bool estado) : Dni(dni), Rol(rol), Estado(estado)
 {
 
 }
@@ -23,6 +23,10 @@ int Admin::getDni()
 int Admin::getRol()
 {
     return Rol;
+}
+bool Admin::getEstado()
+{
+    return Estado;
 }
 ///SETTERS
 void Admin:: setDni(int dni)
@@ -46,5 +50,10 @@ void Admin:: setRol(int rol)
     {
         Rol = 0;
     }
+}
+
+void Admin::setEstado(bool estado)
+{
+    Estado = estado;
 }
 

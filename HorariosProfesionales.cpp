@@ -4,11 +4,16 @@
 
 /// CONSTRUCTOR VACIO
 HorariosProfesionales::HorariosProfesionales()
-    : Matricula(0), DiaAtencion(0), HoraInicio(), HoraFin(), DuracionTurno(0) { }
+    : Matricula(0), DiaAtencion(0), HoraInicio(), HoraFin(), DuracionTurno(0), Estado() { }
 
 ///CONSTRUCTOR CON SUS PARAMETROS
 HorariosProfesionales::HorariosProfesionales(int matricula, int diaAtencion, Hora horaInicio,
-                                             Hora horaFin, int duracionTurno) { }
+    Hora horaFin, int duracionTurno, bool estado)
+    : Matricula(matricula), DiaAtencion(diaAtencion), HoraInicio(horaInicio),
+    HoraFin(horaFin), DuracionTurno(duracionTurno), Estado(estado)
+{
+
+}
 
 ///GETTERS
 int HorariosProfesionales::getMatricula()
@@ -31,6 +36,10 @@ int HorariosProfesionales::getDuracionTurno()
 {
     return DuracionTurno;
 }
+bool HorariosProfesionales::getEstado()
+{
+    return Estado;
+}
 
 ///SETTERS
 void HorariosProfesionales::setMatricula(int matricula)
@@ -52,4 +61,8 @@ void HorariosProfesionales::setHoraFin(Hora horaFin)
 void HorariosProfesionales::setDuracionTurno(int duracionTurno)
 {
     DuracionTurno = duracionTurno;
+}
+void HorariosProfesionales::setEstado(bool estado)
+{
+    Estado = estado;
 }

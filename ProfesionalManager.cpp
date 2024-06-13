@@ -147,7 +147,7 @@ void ProfesionalManager::agregar()
 {
     if(archiProf.guardar(crear()))
     {
-        cout << "¡El profesional fue guardado con exito!" << endl;
+        cout << "¡El profesional fue guardado con éxito!" << endl;
     }
     else
     {

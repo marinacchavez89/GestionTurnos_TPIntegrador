@@ -6,14 +6,14 @@ using namespace std;
 
 /// CONSTRUCTOR VACIO
 EstadoTurno::EstadoTurno()
-    : IdEstadoTurno(0)
+    : IdEstadoTurno(0), Estado()
 {
     strcpy(Descripcion, "");
 }
 
 /// CONSTRUCTOR CON PARAMETROS
-EstadoTurno::EstadoTurno(int idEstadoTurno, string descripcion)
-    : IdEstadoTurno(idEstadoTurno)
+EstadoTurno::EstadoTurno(int idEstadoTurno, string descripcion, bool estado)
+    : IdEstadoTurno(idEstadoTurno), Estado(estado)
 {
     setDescripcion(descripcion);
 }
@@ -27,6 +27,11 @@ int EstadoTurno::getIdEstadoTurno()
 string EstadoTurno::getDescripcion()
 {
     return Descripcion;
+}
+
+bool EstadoTurno::getEstado()
+{
+    return Estado;
 }
 
 /// SETTERS
@@ -45,4 +50,9 @@ void EstadoTurno::setDescripcion(string descripcion)
     {
         strcpy(Descripcion, "SIN DATOS");
     }
+}
+
+void EstadoTurno::setEstado(bool estado)
+{
+    Estado = estado;
 }

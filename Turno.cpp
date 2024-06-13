@@ -6,15 +6,15 @@ using namespace std;
 
 /// CONSTRUCTOR VACIO
 Turno::Turno()
-    : FechaTurno(), Matricula(0), Dni(0), IdEspecialidad(0), IdConsultorio(0), IdCobertura(0), HoraTurno(), IdEstadoTurno(0)
+    : FechaTurno(), Matricula(0), Dni(0), IdEspecialidad(0), IdConsultorio(0), IdCobertura(0), HoraTurno(), IdEstadoTurno(0), Estado()
 {
 }
 
 /// CONSTRUCTOR CON PARAMETROS
 Turno::Turno(Fecha fechaTurno, int matricula, int dni, int idEspecialidad, int idConsultorio, int idCobertura,
-             Hora horaTurno, int estadoTurno)
+             Hora horaTurno, int estadoTurno, bool estado)
     : FechaTurno(fechaTurno), Matricula(matricula), Dni(dni), IdEspecialidad(idEspecialidad), IdConsultorio(idConsultorio),
-      IdCobertura(idCobertura), HoraTurno(horaTurno), IdEstadoTurno(estadoTurno)
+      IdCobertura(idCobertura), HoraTurno(horaTurno), IdEstadoTurno(estadoTurno), Estado(estado)
 {
 }
 
@@ -51,6 +51,11 @@ int Turno::getEstadoTurno()
 {
     return IdEstadoTurno;
 }
+bool Turno::getEstado()
+{
+    return Estado;
+}
+
 
 /// SETTERS
 void Turno::setFechaTurno(Fecha fechaTurno)
@@ -84,4 +89,8 @@ void Turno::setHoraTurno(Hora horaTurno)
 void Turno::setEstadoTurno(int estadoTurno)
 {
     IdEstadoTurno = estadoTurno;
+}
+void Turno::setEstado(bool estado)
+{
+    Estado = estado;
 }

@@ -6,14 +6,14 @@ using namespace std;
 
 /// CONSTRUCTOR VACIO
 Especialidad::Especialidad()
-    : IdEspecialidad(0)
+    : IdEspecialidad(0), Estado()
 {
     strcpy(Descripcion, "");
 }
 
 /// CONSTRUCTOR CON PARAMETROS
-Especialidad::Especialidad(int idEspecialidad, string descripcion)
-    : IdEspecialidad(idEspecialidad)
+Especialidad::Especialidad(int idEspecialidad, string descripcion, bool estado)
+    : IdEspecialidad(idEspecialidad), Estado(estado)
 {
     setDescripcion(descripcion);
 }
@@ -27,6 +27,11 @@ int Especialidad::getIdEspecialidad()
 string Especialidad::getDescripcion()
 {
     return Descripcion;
+}
+
+bool Especialidad::getEstado()
+{
+    return Estado;
 }
 
 /// SETTERS
@@ -45,5 +50,10 @@ void Especialidad::setDescripcion(string descripcion)
     {
         strcpy(Descripcion, "SIN DATOS");
     }
+}
+
+void Especialidad::setEstado(bool estado)
+{
+    Estado = estado;
 }
 

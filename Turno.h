@@ -14,12 +14,13 @@ private:
     int IdCobertura;
     Hora HoraTurno;
     int IdEstadoTurno;
+    bool Estado;
 
 public:
     /// CONSTRUCTOR
     Turno();
     Turno(Fecha fechaTurno, int matricula, int dni, int idEspecialidad, int idConsultorio, int idCobertura,
-          Hora horaTurno, int estadoTurno);
+          Hora horaTurno, int estadoTurno, bool estado);
 
     /// GETTERS
     Fecha getFechaTurno();
@@ -30,6 +31,7 @@ public:
     int getIdCobertura();
     Hora getHoraTurno();
     int getEstadoTurno();
+    bool getEstado();
 
     /// SETTERS
     void setFechaTurno(Fecha fechaTurno);
@@ -40,4 +42,5 @@ public:
     void setIdCobertura(int idCobertura);
     void setHoraTurno(Hora horaTurno);
     void setEstadoTurno(int estadoTurno);
+    void setEstado(bool estado);
 };
