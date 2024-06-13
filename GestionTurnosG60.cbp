@@ -51,6 +51,10 @@
 		<Unit filename="Persona.h" />
 		<Unit filename="Profesional.cpp" />
 		<Unit filename="Profesional.h" />
+		<Unit filename="ProfesionalArchivo.cpp" />
+		<Unit filename="ProfesionalArchivo.h" />
+		<Unit filename="ProfesionalManager.cpp" />
+		<Unit filename="ProfesionalManager.h" />
 		<Unit filename="Turno.cpp" />
 		<Unit filename="Turno.h" />
 		<Unit filename="funciones.h" />

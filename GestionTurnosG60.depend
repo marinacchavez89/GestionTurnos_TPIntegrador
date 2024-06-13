@@ -16,7 +16,7 @@
 	<conio.h>
 	<windows.h>
 
-1717034952 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
+1718253604 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
 	<iostream>
 	<locale.h>
 	<cstring>
@@ -24,7 +24,7 @@
 	<conio.h>
 	<windows.h>
 	"ProfesionalArchivo.h"
-	"Profesional.h"
+	"ProfesionalManager.h"
 
 1717031923 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
 	<iostream>
@@ -48,13 +48,13 @@
 
 1716820683 c:\users\marina_chavez\desktop\gestionturnosg60\hora.h
 
-1717033754 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesional.cpp
+1718242368 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesional.cpp
 	<iostream>
 	<cstring>
 	"Profesional.h"
 	<string>
 
-1717029081 c:\users\marina_chavez\desktop\gestionturnosg60\profesional.h
+1718242359 c:\users\marina_chavez\desktop\gestionturnosg60\profesional.h
 	"Persona.h"
 	<string>
 	"Hora.h"
@@ -111,12 +111,18 @@
 	<string>
 	"Hora.h"
 
-1717034203 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalarchivo.cpp
+1718252424 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalarchivo.cpp
 	<iostream>
-	<cstring>
 	"ProfesionalArchivo.h"
+
+1718252361 c:\users\marina_chavez\desktop\gestionturnosg60\profesionalarchivo.h
 	"Profesional.h"
 
-1717032941 c:\users\marina_chavez\desktop\gestionturnosg60\profesionalarchivo.h
+1718253220 c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.h
 	"Profesional.h"
+	"ProfesionalArchivo.h"
+
+1718253633 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.cpp
+	<iostream>
+	"ProfesionalManager.h"
 

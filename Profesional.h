@@ -29,9 +29,4 @@ public:
     void setConsultorio(int consultorio);
     void setHonorario(float honorario);
     void setDuracionTurno(int duracionTurno);
-
-    ///MÉTODOS
-    void cargar();
-    void mostrar();
-
 };
