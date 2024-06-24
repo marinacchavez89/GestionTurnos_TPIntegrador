@@ -11,6 +11,12 @@
 #include "ProfesionalManager.h"
 #include "EspecialidadArchivo.h"
 #include "EspecialidadManager.h"
+#include "EstadoTurnoArchivo.h"
+#include "EstadoTurnoManager.h"
+#include "PacienteArchivo.h"
+#include "PacienteManager.h"
+#include "HorariosProfesionalesArchivo.h"
+#include "HorariosProfesionalesManager.h"
 
 using namespace std;
 
@@ -20,6 +26,12 @@ private:
     ProfesionalManager managerProfesional;
     EspecialidadArchivo archiEspe;
     EspecialidadManager managerEspecialidad;
+    EstadoTurnoArchivo  archiEstadoTurno;
+    EstadoTurnoManager  managerEstadoTurnos;
+    PacienteArchivo archiPacientes;
+    PacienteManager managerPaciente;
+    HorariosProfesionalesArchivo archiHorariosProf;
+    HorariosProfesionalesManager managerHorariosProf;
 public:
     void configurarConsola();
     void dibujarEncabezado();
@@ -83,6 +95,7 @@ void AppManager::errorOpcion(){
     cout<<"Ingrese una opción correcta del menu."<<endl;
     system("pause");
 }
+
 void AppManager::menuABMTurnos(){
     int opcionTurnos;
     do
@@ -96,7 +109,10 @@ void AppManager::menuABMTurnos(){
         cout << "2  - Modificar turno" << endl;
         cout << "3  - Eliminar turno" << endl;
         cout << "4  - Listar turnos" << endl;
-        cout << "5  - xxxxxxxxxxxxxx" << endl;
+        cout << "5  - Alta estado del turno" << endl;
+        cout << "6  - Modificar estado del turno" << endl;
+        cout << "7  - Eliminar estado del turno" << endl;
+        cout << "8  - Listar estado de los turnos" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
@@ -118,14 +134,30 @@ void AppManager::menuABMTurnos(){
             //Llamar a la funcion correspondiente.
             break;
         case 5:
-            //Llamar a la funcion correspondiente.
+            managerEstadoTurnos.agregar();
+            system("pause");
+            break;
+        case 6:
+            managerEstadoTurnos.modificar();
+            system("pause");
+            break;
+        case 7:
+            managerEstadoTurnos.eliminar();
+            system("pause");
+            break;
+        case 8:
+            managerEstadoTurnos.listar();
+            system("pause");
             break;
         case 0:
             menuPrincipal();
             break;
+        default:
+            errorOpcion();
+            break;
         }
     }
-    while(opcionTurnos <= 1 || opcionTurnos >= 5);
+    while(opcionTurnos >= 0 || opcionTurnos <= 8);
 
 }
 void AppManager::menuABMProfesionales(){
@@ -177,7 +209,7 @@ void AppManager::menuABMProfesionales(){
             break;
         }
     }
-    while(opcionProfesionales <= 1 || opcionProfesionales >= 5);
+    while(opcionProfesionales >= 0 || opcionProfesionales <= 5);
 
 }
 void AppManager::menuABMPacientes(){
@@ -203,16 +235,20 @@ void AppManager::menuABMPacientes(){
         switch(opcionPacientes)
         {
         case 1:
-            //Llamar a la funcion correspondiente.
+            managerPaciente.agregar();
+            system("pause");
             break;
         case 2:
-            //Llamar a la funcion correspondiente.
+            managerPaciente.modificar();
+            system("pause");
             break;
         case 3:
-            //Llamar a la funcion correspondiente.
+            managerPaciente.eliminar();
+            system("pause");
             break;
         case 4:
-            //Llamar a la funcion correspondiente.
+            managerPaciente.listar();
+            system("pause");
             break;
         case 5:
             //Llamar a la funcion correspondiente.
@@ -220,9 +256,12 @@ void AppManager::menuABMPacientes(){
         case 0:
             menuPrincipal();
             break;
+        default:
+            errorOpcion();
+            break;
         }
     }
-    while(opcionPacientes <= 1 || opcionPacientes >= 5);
+    while(opcionPacientes >= 0 || opcionPacientes <= 5);
 
 }
 void AppManager::menuABMEspecialidades(){
@@ -270,9 +309,12 @@ void AppManager::menuABMEspecialidades(){
         case 0:
             menuPrincipal();
             break;
+        default:
+            errorOpcion();
+            break;
         }
     }
-    while(opcionEspecialidades <= 1 || opcionEspecialidades >= 5);
+    while(opcionEspecialidades >= 0 || opcionEspecialidades <= 5);
 
 }
 void AppManager::menuABMAgendaProfesionales(){
@@ -298,16 +340,20 @@ void AppManager::menuABMAgendaProfesionales(){
         switch(opcionAgenda)
         {
         case 1:
-            //Llamar a la funcion correspondiente.
+            managerHorariosProf.agregar();
+            system("pause");
             break;
         case 2:
-            //Llamar a la funcion correspondiente.
+            managerHorariosProf.modificar();
+            system("pause");
             break;
         case 3:
-            //Llamar a la funcion correspondiente.
+            managerHorariosProf.eliminar();
+            system("pause");
             break;
         case 4:
-            //Llamar a la funcion correspondiente.
+            managerHorariosProf.listar();
+            system("pause");
             break;
         case 5:
             //Llamar a la funcion correspondiente.
@@ -315,9 +361,12 @@ void AppManager::menuABMAgendaProfesionales(){
         case 0:
             menuPrincipal();
             break;
+        default:
+            errorOpcion();
+            break;
         }
     }
-    while(opcionAgenda <= 1 || opcionAgenda >= 5);
+    while(opcionAgenda >= 0 || opcionAgenda <= 5);
 
 }
 

@@ -1,5 +1,6 @@
 #pragma once
-
+#include <string>
+using namespace std;
 class Hora
 {
 private:
@@ -16,4 +17,8 @@ public:
     ///SETTERS
     void setHoras(int horas);
     void setMinutos(int minutos);
+
+    //metodo adicional
+    void cargar();
+    string toString(); ///
 };

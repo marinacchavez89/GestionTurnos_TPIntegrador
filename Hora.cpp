@@ -1,48 +1,77 @@
-#include <iostream>
 #include "Hora.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
-///USAMOS EL CONSTRUCTOR DEFAULT
-Hora::Hora() : Horas(0), Minutos(0)
-{
+/// Constructor por defecto
+Hora::Hora() : Horas(0), Minutos(0) { }
 
-}
+/// Constructor con parámetros
+Hora::Hora(int horas, int minutos) : Horas(horas), Minutos(minutos) { }
 
-/// CONSTRUCTOR CON PARAMETROS
-Hora::Hora(int horas, int minutos) : Horas(horas), Minutos(minutos)
-{
-
-}
 /// GETTERS
-
 int Hora::getHoras()
 {
     return Horas;
 }
+
 int Hora::getMinutos()
 {
     return Minutos;
 }
-///SETTERS
-void Hora:: setHoras(int horas)
+
+/// SETTERS
+void Hora::setHoras(int horas)
 {
-    if(horas < 24 && horas >= 0)
+    Horas = horas;
+}
+
+void Hora::setMinutos(int minutos)
+{
+    Minutos = minutos;
+}
+
+void Hora::cargar()
+{
+    int horas, minutos;
+    cout << "Ingrese hora (Formato - hh):";
+    cin >> horas;
+    if(horas >= 0 && horas <= 23)
     {
-        Horas = horas;
+       setHoras(horas);
     }
     else
     {
-        Horas = 0; ///SI LLEGASE LA HORA A SER INVALIDA LE ASIGNAMOS 0
+        cout << "Ingrese hora válida (de 00 a 23):";
+        cin >> horas;
+        setHoras(horas);
     }
-}
-void Hora:: setMinutos(int minutos)
-{
-    if(minutos < 60 && minutos >=0)
+
+    cout << "Ingrese minutos (Formato - mm):";
+    cin >> minutos;
+    if(minutos >=0 && minutos <= 59)
     {
-        Minutos = minutos;
+        setMinutos(minutos);
+    }
+     else
+    {
+        cout << "Ingrese minutos válidos (de 00 a 59):";
+        cin >> minutos;
+        setMinutos(minutos);
+    }
+
+}
+
+string Hora::toString()
+{
+    if(Minutos!=0)
+    {
+      return to_string(Horas) + ":" + to_string(Minutos) + " h.";
     }
     else
     {
-        Minutos = 0; /// LE ASIGNAMOS MINUTOS EN 0 SI SE CARGA ERRONEAMENTE.
+      return to_string(Horas) + ":00 h.";
     }
+
 }
+
