@@ -45,12 +45,16 @@ void EspecialidadManager::mostrar(Especialidad espe)
 
 void EspecialidadManager::agregar()
 {
-    if(archiEspe.guardar(crear()))
-    {
-        cout << "¡La especialidad fue guardada con éxito!" << endl;
+    Especialidad nuevaEspecialidad = crear();
+
+    if (archiEspe.buscarByID(nuevaEspecialidad.getIdEspecialidad()) != -1) {
+        cout << "Ya existe el registro. No se puede duplicar." << endl;
+        return;
     }
-    else
-    {
+
+    if (archiEspe.guardar(nuevaEspecialidad)) {
+        cout << "¡La especialidad fue guardada con éxito!" << endl;
+    } else {
         cout << "No se pudo guardar la especialidad." << endl;
     }
 }

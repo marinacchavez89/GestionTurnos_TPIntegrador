@@ -2,88 +2,100 @@
 using namespace std;
 #include "ProfesionalArchivo.h"
 
-bool ProfesionalArchivo::guardar(Profesional reg){
-   bool resultado;
-   FILE *pFile;
+bool ProfesionalArchivo::guardar(Profesional reg)
+{
+    bool resultado;
+    FILE *pFile;
 
-   pFile = fopen("profesionales.dat", "ab");
+    pFile = fopen("profesionales.dat", "ab");
 
-   if(pFile == nullptr){
-      return false;
-   }
+    if(pFile == nullptr)
+    {
+        return false;
+    }
 
-   resultado = fwrite(&reg, sizeof (Profesional), 1, pFile);
+    resultado = fwrite(&reg, sizeof (Profesional), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return resultado;
+    return resultado;
 }
 
-bool ProfesionalArchivo::guardar(int index, Profesional reg){
-   bool resultado;
-   FILE *pFile;
+bool ProfesionalArchivo::guardar(int index, Profesional reg)
+{
+    bool resultado;
+    FILE *pFile;
 
-   pFile = fopen("profesionales.dat", "rb+");
+    pFile = fopen("profesionales.dat", "rb+");
 
-   if(pFile == nullptr){
+    if(pFile == nullptr)
+    {
 
-      return false;
-   }
+        return false;
+    }
 
-   fseek(pFile, sizeof(Profesional) * index, SEEK_SET);
+    fseek(pFile, sizeof(Profesional) * index, SEEK_SET);
 
-   resultado = fwrite(&reg, sizeof (Profesional), 1, pFile);
+    resultado = fwrite(&reg, sizeof (Profesional), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return resultado;
+    return resultado;
 }
 
-Profesional ProfesionalArchivo::leer(int index){
-   Profesional reg;
-   FILE *pFile;
+Profesional ProfesionalArchivo::leer(int index)
+{
+    Profesional reg;
+    FILE *pFile;
 
-   pFile = fopen("profesionales.dat", "rb");
+    pFile = fopen("profesionales.dat", "rb");
 
-   if(pFile == nullptr){
-      return reg;
-   }
+    if(pFile == nullptr)
+    {
+        return reg;
+    }
 
-   fseek(pFile, index * sizeof (Profesional), SEEK_SET);
+    fseek(pFile, index * sizeof (Profesional), SEEK_SET);
 
-   fread(&reg, sizeof(Profesional), 1, pFile);
+    fread(&reg, sizeof(Profesional), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return reg;
+    return reg;
 }
 
-void ProfesionalArchivo::leerTodos(Profesional registros[], int cantidad){
-   FILE *pFile;
+void ProfesionalArchivo::leerTodos(Profesional registros[], int cantidad)
+{
+    FILE *pFile;
 
-   pFile = fopen("profesionales.dat", "rb");
+    pFile = fopen("profesionales.dat", "rb");
 
-   if(pFile == nullptr){
-      return;
-   }
+    if(pFile == nullptr)
+    {
+        return;
+    }
 
-   fread(registros, sizeof(Profesional), cantidad, pFile);
+    fread(registros, sizeof(Profesional), cantidad, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 }
 
-int ProfesionalArchivo::buscarByMatricula(int mat){
+int ProfesionalArchivo::buscarByMatricula(int mat)
+{
     Profesional reg;
     int pos = 0;
     FILE * pFile;
 
     pFile = fopen("profesionales.dat", "rb");
-    if(pFile == nullptr){
+    if(pFile == nullptr)
+    {
         return -1;
     }
 
-    while(fread(&reg, sizeof(Profesional), 1, pFile)){
-        if(reg.getMatricula() == mat){
+    while(fread(&reg, sizeof(Profesional), 1, pFile))
+    {
+        if(reg.getMatricula() == mat)
+        {
             fclose(pFile);
             return pos;
         }
@@ -94,21 +106,49 @@ int ProfesionalArchivo::buscarByMatricula(int mat){
     return -1;
 }
 
-int ProfesionalArchivo::getCantidadRegistros(){
-   FILE *pFile;
-   int tam;
+int ProfesionalArchivo::buscarByDni(int dni)
+{
+    Profesional reg;
+    int pos = 0;
+    FILE * pFile;
 
-   pFile = fopen("profesionales.dat", "rb");
+    pFile = fopen("profesionales.dat", "rb");
+    if(pFile == nullptr)
+    {
+        return -1;
+    }
 
-   if(pFile == nullptr){
-      return 0;
-   }
+    while(fread(&reg, sizeof(Profesional), 1, pFile))
+    {
+        if(reg.getDni() == dni)
+        {
+            fclose(pFile);
+            return pos;
+        }
+        pos++;
+    }
 
-   fseek(pFile, 0, SEEK_END);
+    fclose(pFile);
+    return -1;
+}
 
-   tam = ftell(pFile) / sizeof (Profesional);
+int ProfesionalArchivo::getCantidadRegistros()
+{
+    FILE *pFile;
+    int tam;
 
-   fclose(pFile);
+    pFile = fopen("profesionales.dat", "rb");
 
-   return tam;
+    if(pFile == nullptr)
+    {
+        return 0;
+    }
+
+    fseek(pFile, 0, SEEK_END);
+
+    tam = ftell(pFile) / sizeof (Profesional);
+
+    fclose(pFile);
+
+    return tam;
 }

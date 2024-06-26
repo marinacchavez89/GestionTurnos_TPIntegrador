@@ -129,12 +129,16 @@ void PacienteManager::mostrar(Paciente paciente)
 
 void PacienteManager::agregar()
 {
-    if(archiPacientes.guardar(crear()))
-    {
-        cout << "¡El paciente fue guardado con éxito!" << endl;
+    Paciente nuevoPaciente = crear();
+
+    if (archiPacientes.buscarByDni(nuevoPaciente.getDni()) != -1) {
+        cout << "Ya existe el registro. No se puede duplicar." << endl;
+        return;
     }
-    else
-    {
+
+    if (archiPacientes.guardar(nuevoPaciente)) {
+        cout << "¡El paciente fue guardado con éxito!" << endl;
+    } else {
         cout << "No se pudo guardar el paciente." << endl;
     }
 }

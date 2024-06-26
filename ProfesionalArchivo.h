@@ -11,5 +11,6 @@ public:
     Profesional leer(int index);
     void leerTodos(Profesional registros[], int cantidad);
     int buscarByMatricula(int mat);
+    int buscarByDni(int dni);
     int getCantidadRegistros();
 };

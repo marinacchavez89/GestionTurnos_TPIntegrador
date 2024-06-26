@@ -44,12 +44,16 @@ void EstadoTurnoManager::mostrar(EstadoTurno estadoTurno)
 
 void EstadoTurnoManager::agregar()
 {
-    if(archiEstadoTurno.guardar(crear()))
-    {
-        cout << "¡El estado del turno fue guardado con éxito!" << endl;
+    EstadoTurno nuevoEstadoTurno = crear();
+
+    if (archiEstadoTurno.buscarByID(nuevoEstadoTurno.getIdEstadoTurno()) != -1) {
+        cout << "Ya existe el registro. No se puede duplicar." << endl;
+        return;
     }
-    else
-    {
+
+    if (archiEstadoTurno.guardar(nuevoEstadoTurno)) {
+        cout << "¡El estado del turno fue guardado con éxito!" << endl;
+    } else {
         cout << "No se pudo guardar el estado del turno." << endl;
     }
 }

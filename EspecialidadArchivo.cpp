@@ -2,88 +2,99 @@
 using namespace std;
 #include "EspecialidadArchivo.h"
 
-bool EspecialidadArchivo::guardar(Especialidad reg){
-   bool resultado;
-   FILE *pFile;
+bool EspecialidadArchivo::guardar(Especialidad reg)
+{
+    bool resultado;
+    FILE *pFile;
 
-   pFile = fopen("especialidades.dat", "ab");
+    pFile = fopen("especialidades.dat", "ab");
 
-   if(pFile == nullptr){
-      return false;
-   }
+    if(pFile == nullptr)
+    {
+        return false;
+    }
 
-   resultado = fwrite(&reg, sizeof (Especialidad), 1, pFile);
+    resultado = fwrite(&reg, sizeof (Especialidad), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return resultado;
+    return resultado;
 }
 
-bool EspecialidadArchivo::guardar(int index, Especialidad reg){
-   bool resultado;
-   FILE *pFile;
+bool EspecialidadArchivo::guardar(int index, Especialidad reg)
+{
+    bool resultado;
+    FILE *pFile;
 
-   pFile = fopen("especialidades.dat", "rb+");
+    pFile = fopen("especialidades.dat", "rb+");
 
-   if(pFile == nullptr){
+    if(pFile == nullptr)
+    {
+        return false;
+    }
 
-      return false;
-   }
+    fseek(pFile, sizeof(Especialidad) * index, SEEK_SET);
 
-   fseek(pFile, sizeof(Especialidad) * index, SEEK_SET);
+    resultado = fwrite(&reg, sizeof (Especialidad), 1, pFile);
 
-   resultado = fwrite(&reg, sizeof (Especialidad), 1, pFile);
+    fclose(pFile);
 
-   fclose(pFile);
-
-   return resultado;
+    return resultado;
 }
 
-Especialidad EspecialidadArchivo::leer(int index){
-   Especialidad reg;
-   FILE *pFile;
+Especialidad EspecialidadArchivo::leer(int index)
+{
+    Especialidad reg;
+    FILE *pFile;
 
-   pFile = fopen("especialidades.dat", "rb");
+    pFile = fopen("especialidades.dat", "rb");
 
-   if(pFile == nullptr){
-      return reg;
-   }
+    if(pFile == nullptr)
+    {
+        return reg;
+    }
 
-   fseek(pFile, index * sizeof (Especialidad), SEEK_SET);
+    fseek(pFile, index * sizeof (Especialidad), SEEK_SET);
 
-   fread(&reg, sizeof(Especialidad), 1, pFile);
+    fread(&reg, sizeof(Especialidad), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return reg;
+    return reg;
 }
 
-void EspecialidadArchivo::leerTodos(Especialidad registros[], int cantidad){
-   FILE *pFile;
+void EspecialidadArchivo::leerTodos(Especialidad registros[], int cantidad)
+{
+    FILE *pFile;
 
-   pFile = fopen("especialidades.dat", "rb");
+    pFile = fopen("especialidades.dat", "rb");
 
-   if(pFile == nullptr){
-      return;
-   }
+    if(pFile == nullptr)
+    {
+        return;
+    }
 
-   fread(registros, sizeof(Especialidad), cantidad, pFile);
+    fread(registros, sizeof(Especialidad), cantidad, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 }
 
-int EspecialidadArchivo::buscarByID(int idEspecialidad){
+int EspecialidadArchivo::buscarByID(int idEspecialidad)
+{
     Especialidad reg;
     int pos = 0;
     FILE * pFile;
 
     pFile = fopen("especialidades.dat", "rb");
-    if(pFile == nullptr){
+    if(pFile == nullptr)
+    {
         return -1;
     }
 
-    while(fread(&reg, sizeof(Especialidad), 1, pFile)){
-        if(reg.getIdEspecialidad() == idEspecialidad){
+    while(fread(&reg, sizeof(Especialidad), 1, pFile))
+    {
+        if(reg.getIdEspecialidad() == idEspecialidad)
+        {
             fclose(pFile);
             return pos;
         }
@@ -94,21 +105,23 @@ int EspecialidadArchivo::buscarByID(int idEspecialidad){
     return -1;
 }
 
-int EspecialidadArchivo::getCantidadRegistros(){
-   FILE *pFile;
-   int tam;
+int EspecialidadArchivo::getCantidadRegistros()
+{
+    FILE *pFile;
+    int tam;
 
-   pFile = fopen("especialidades.dat", "rb");
+    pFile = fopen("especialidades.dat", "rb");
 
-   if(pFile == nullptr){
-      return 0;
-   }
+    if(pFile == nullptr)
+    {
+        return 0;
+    }
 
-   fseek(pFile, 0, SEEK_END);
+    fseek(pFile, 0, SEEK_END);
 
-   tam = ftell(pFile) / sizeof (Especialidad);
+    tam = ftell(pFile) / sizeof (Especialidad);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return tam;
+    return tam;
 }

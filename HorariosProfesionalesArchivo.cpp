@@ -2,88 +2,100 @@
 using namespace std;
 #include "HorariosProfesionalesArchivo.h"
 
-bool HorariosProfesionalesArchivo::guardar(HorariosProfesionales reg){
-   bool resultado;
-   FILE *pFile;
+bool HorariosProfesionalesArchivo::guardar(HorariosProfesionales reg)
+{
+    bool resultado;
+    FILE *pFile;
 
-   pFile = fopen("horariosProfesionales.dat", "ab");
+    pFile = fopen("horariosProfesionales.dat", "ab");
 
-   if(pFile == nullptr){
-      return false;
-   }
+    if(pFile == nullptr)
+    {
+        return false;
+    }
 
-   resultado = fwrite(&reg, sizeof (HorariosProfesionales), 1, pFile);
+    resultado = fwrite(&reg, sizeof (HorariosProfesionales), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return resultado;
+    return resultado;
 }
 
-bool HorariosProfesionalesArchivo::guardar(int index, HorariosProfesionales reg){
-   bool resultado;
-   FILE *pFile;
+bool HorariosProfesionalesArchivo::guardar(int index, HorariosProfesionales reg)
+{
+    bool resultado;
+    FILE *pFile;
 
-   pFile = fopen("horariosProfesionales.dat", "rb+");
+    pFile = fopen("horariosProfesionales.dat", "rb+");
 
-   if(pFile == nullptr){
+    if(pFile == nullptr)
+    {
 
-      return false;
-   }
+        return false;
+    }
 
-   fseek(pFile, sizeof(HorariosProfesionales) * index, SEEK_SET);
+    fseek(pFile, sizeof(HorariosProfesionales) * index, SEEK_SET);
 
-   resultado = fwrite(&reg, sizeof (HorariosProfesionales), 1, pFile);
+    resultado = fwrite(&reg, sizeof (HorariosProfesionales), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return resultado;
+    return resultado;
 }
 
-HorariosProfesionales HorariosProfesionalesArchivo::leer(int index){
-   HorariosProfesionales reg;
-   FILE *pFile;
+HorariosProfesionales HorariosProfesionalesArchivo::leer(int index)
+{
+    HorariosProfesionales reg;
+    FILE *pFile;
 
-   pFile = fopen("horariosProfesionales.dat", "rb");
+    pFile = fopen("horariosProfesionales.dat", "rb");
 
-   if(pFile == nullptr){
-      return reg;
-   }
+    if(pFile == nullptr)
+    {
+        return reg;
+    }
 
-   fseek(pFile, index * sizeof (HorariosProfesionales), SEEK_SET);
+    fseek(pFile, index * sizeof (HorariosProfesionales), SEEK_SET);
 
-   fread(&reg, sizeof(HorariosProfesionales), 1, pFile);
+    fread(&reg, sizeof(HorariosProfesionales), 1, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return reg;
+    return reg;
 }
 
-void HorariosProfesionalesArchivo::leerTodos(HorariosProfesionales registros[], int cantidad){
-   FILE *pFile;
+void HorariosProfesionalesArchivo::leerTodos(HorariosProfesionales registros[], int cantidad)
+{
+    FILE *pFile;
 
-   pFile = fopen("horariosProfesionales.dat", "rb");
+    pFile = fopen("horariosProfesionales.dat", "rb");
 
-   if(pFile == nullptr){
-      return;
-   }
+    if(pFile == nullptr)
+    {
+        return;
+    }
 
-   fread(registros, sizeof(HorariosProfesionales), cantidad, pFile);
+    fread(registros, sizeof(HorariosProfesionales), cantidad, pFile);
 
-   fclose(pFile);
+    fclose(pFile);
 }
 
-int HorariosProfesionalesArchivo::buscarByMatricula(int matricula){
+int HorariosProfesionalesArchivo::buscarByMatricula(int matricula)
+{
     HorariosProfesionales reg;
     int pos = 0;
     FILE * pFile;
 
     pFile = fopen("horariosProfesionales.dat", "rb");
-    if(pFile == nullptr){
+    if(pFile == nullptr)
+    {
         return -1;
     }
 
-    while(fread(&reg, sizeof(HorariosProfesionales), 1, pFile)){
-        if(reg.getMatricula() == matricula){
+    while(fread(&reg, sizeof(HorariosProfesionales), 1, pFile))
+    {
+        if(reg.getMatricula() == matricula)
+        {
             fclose(pFile);
             return pos;
         }
@@ -94,21 +106,23 @@ int HorariosProfesionalesArchivo::buscarByMatricula(int matricula){
     return -1;
 }
 
-int HorariosProfesionalesArchivo::getCantidadRegistros(){
-   FILE *pFile;
-   int tam;
+int HorariosProfesionalesArchivo::getCantidadRegistros()
+{
+    FILE *pFile;
+    int tam;
 
-   pFile = fopen("horariosProfesionales.dat", "rb");
+    pFile = fopen("horariosProfesionales.dat", "rb");
 
-   if(pFile == nullptr){
-      return 0;
-   }
+    if(pFile == nullptr)
+    {
+        return 0;
+    }
 
-   fseek(pFile, 0, SEEK_END);
+    fseek(pFile, 0, SEEK_END);
 
-   tam = ftell(pFile) / sizeof (HorariosProfesionales);
+    tam = ftell(pFile) / sizeof (HorariosProfesionales);
 
-   fclose(pFile);
+    fclose(pFile);
 
-   return tam;
+    return tam;
 }
