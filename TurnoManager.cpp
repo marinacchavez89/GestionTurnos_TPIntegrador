@@ -1,6 +1,8 @@
 #include <iostream>
+#include <ctime>
 using namespace std;
 #include "TurnoManager.h"
+#include "HorariosProfesionalesArchivo.h"
 
 Turno TurnoManager::crear(){
     int idTurno, matricula, dni, idEspecialidad, consultorio, idEstadoTurno;
@@ -28,7 +30,8 @@ Turno TurnoManager::crear(){
     cout << "Ingrese la hora del turno: ";
     horaTurno.cargar();
 
-    cout << "Ingrese el ID del estado del turno (0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado)";
+    cout << "Ingrese el ID del estado del turno" << endl;
+    cout << "(0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
 
     return Turno(idTurno, fechaTurno, matricula, dni, idEspecialidad, consultorio, horaTurno, idEstadoTurno, true);
@@ -67,7 +70,8 @@ void TurnoManager::cargar(Turno &turno) {
     horaTurno.cargar();
     turno.setHoraTurno(horaTurno);
 
-    cout << "Ingrese el ID del estado del turno (0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
+    cout << "Ingrese el ID del estado del turno" << endl;
+    cout << "(0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
     turno.setIdEstadoTurno(idEstadoTurno);
 
@@ -90,10 +94,36 @@ void TurnoManager::mostrar(Turno turno)
     }
 }
 
-/// ACA FALTAN VALIDACIONES DE TURNOS
 void TurnoManager::agregar()
 {
     Turno nuevoTurno = crear();
+
+    time_t t = time(nullptr);
+    tm* now = localtime(&t);
+
+    Fecha fechaActual(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
+    Hora horaActual(now->tm_hour, now->tm_min);
+
+
+    if (nuevoTurno.getFechaTurno() < fechaActual ||
+        (nuevoTurno.getFechaTurno() == fechaActual && nuevoTurno.getHoraTurno() < horaActual)) {
+        cout << "La fecha elegida, es una fecha caducada." << endl;
+        return;
+    }
+
+    HorariosProfesionalesArchivo horariosProfesionalArchivo;
+    int index = horariosProfesionalArchivo.buscarByMatricula(nuevoTurno.getMatricula());
+    if (index == -1) {
+        cout << "No se encontró el horario del profesional." << endl;
+        return;
+    }
+
+    HorariosProfesionales horarioProfesional = horariosProfesionalArchivo.leer(index);
+    if (horarioProfesional.getDiaAtencion() != nuevoTurno.getFechaTurno().getDia() ||
+        !(horarioProfesional.getHoraInicio() <= nuevoTurno.getHoraTurno() && nuevoTurno.getHoraTurno() <= horarioProfesional.getHoraFin())) {
+        cout << "El profesional no atiende en el horario seleccionado." << endl;
+        return;
+    }
 
     if (archiTurno.buscarByID(nuevoTurno.getIdTurno()) != -1) {
         cout << "Ya existe el registro. No se puede duplicar." << endl;
@@ -236,3 +266,36 @@ string TurnoManager::estadoTurnoToString(int idEstadoTurno)
     return descripEstadoTurno;
 }
 
+bool TurnoManager::esFechaHoraPasada(Fecha fechaTurno, Hora horaTurno) {
+    time_t t = time(0);
+    tm* now = localtime(&t);
+
+    Fecha fechaActual(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
+    Hora horaActual(now->tm_hour, now->tm_min);
+
+    if (fechaTurno < fechaActual) {
+        return true;
+    } else if (fechaTurno == fechaActual && horaTurno < horaActual) {
+        return true;
+    }
+    return false;
+}
+
+bool TurnoManager::esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTurno) {
+    HorariosProfesionalesArchivo horariosArchivo;
+    int cantidadHorarios = horariosArchivo.getCantidadRegistros();
+    HorariosProfesionales* horarios = new HorariosProfesionales[cantidadHorarios];
+    horariosArchivo.leerTodos(horarios, cantidadHorarios);
+
+    for (int i = 0; i < cantidadHorarios; i++) {
+        if (horarios[i].getMatricula() == matricula && horarios[i].getDiaAtencion() == fechaTurno.getDia()) {
+            if (horaTurno >= horarios[i].getHoraInicio() && horaTurno <= horarios[i].getHoraFin()) {
+                delete[] horarios;
+                return true;
+            }
+        }
+    }
+
+    delete[] horarios;
+    return false;
+}

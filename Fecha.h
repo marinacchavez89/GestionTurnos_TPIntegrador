@@ -19,4 +19,7 @@ public:
     void setAnio(int anio);
     string toString();
     void cargar();
+
+    bool operator<(Fecha otra);
+    bool operator==(Fecha otra);
 };

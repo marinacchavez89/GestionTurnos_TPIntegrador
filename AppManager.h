@@ -107,7 +107,7 @@ void AppManager::menuABMTurnos(){
         dibujarEncabezado();
         cout << "********************************************************************************" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
-        cout << "|                               MENU TURNOS                                 |" << endl;
+        cout << "|                                 MENU TURNOS                                  |" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "1  - Alta turno" << endl;
         cout << "2  - Modificar turno" << endl;

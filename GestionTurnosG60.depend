@@ -16,7 +16,7 @@
 	<conio.h>
 	<windows.h>
 
-1719504436 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
+1719510798 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
 	<iostream>
 	<locale.h>
 	<cstring>
@@ -36,11 +36,11 @@
 	"TurnoArchivo.h"
 	"TurnoManager.h"
 
-1717031923 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
+1719508821 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1717031793 c:\users\marina_chavez\desktop\gestionturnosg60\fecha.h
+1719508805 c:\users\marina_chavez\desktop\gestionturnosg60\fecha.h
 	<string>
 
 1717028857 source:c:\users\marina_chavez\desktop\gestionturnosg60\persona.cpp
@@ -52,12 +52,12 @@
 	<cstring>
 	"Fecha.h"
 
-1719250614 source:c:\users\marina_chavez\desktop\gestionturnosg60\hora.cpp
+1719509978 source:c:\users\marina_chavez\desktop\gestionturnosg60\hora.cpp
 	"Hora.h"
 	<iostream>
 	<string>
 
-1719244975 c:\users\marina_chavez\desktop\gestionturnosg60\hora.h
+1719509302 c:\users\marina_chavez\desktop\gestionturnosg60\hora.h
 	<string>
 
 1718242368 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesional.cpp
@@ -203,14 +203,16 @@
 	<iostream>
 	"TurnoArchivo.h"
 
-1719508071 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
+1719510697 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
 	<iostream>
+	<ctime>
 	"TurnoManager.h"
+	"HorariosProfesionalesArchivo.h"
 
 1719489177 c:\users\marina_chavez\desktop\gestionturnosg60\turnoarchivo.h
 	"Turno.h"
 
-1719503163 c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.h
+1719508575 c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.h
 	"Turno.h"
 	"TurnoArchivo.h"
 

@@ -61,3 +61,14 @@ void Fecha::cargar()
     cout<<"Ingrese anio: ";
     cin>>Anio;
 }
+
+bool Fecha::operator<(Fecha otra){
+    if (Anio < otra.Anio) return true;
+    if (Anio == otra.Anio && Mes < otra.Mes) return true;
+    if (Anio == otra.Anio && Mes == otra.Mes && Dia < otra.Dia) return true;
+    return false;
+}
+
+bool Fecha::operator==(Fecha otra) {
+    return (Dia == otra.Dia && Mes == otra.Mes && Anio == otra.Anio);
+}

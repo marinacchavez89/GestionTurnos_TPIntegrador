@@ -77,6 +77,7 @@
 		<Unit filename="TurnoArchivo.h" />
 		<Unit filename="TurnoManager.cpp" />
 		<Unit filename="TurnoManager.h" />
+		<Unit filename="Utils.h" />
 		<Unit filename="funciones.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>

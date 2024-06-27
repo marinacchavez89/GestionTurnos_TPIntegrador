@@ -38,7 +38,7 @@ void Hora::cargar()
     cin >> horas;
     if(horas >= 0 && horas <= 23)
     {
-       setHoras(horas);
+        setHoras(horas);
     }
     else
     {
@@ -53,7 +53,7 @@ void Hora::cargar()
     {
         setMinutos(minutos);
     }
-     else
+    else
     {
         cout << "Ingrese minutos válidos (de 00 a 59):";
         cin >> minutos;
@@ -66,12 +66,45 @@ string Hora::toString()
 {
     if(Minutos!=0)
     {
-      return to_string(Horas) + ":" + to_string(Minutos) + " h.";
+        return to_string(Horas) + ":" + to_string(Minutos) + " h.";
     }
     else
     {
-      return to_string(Horas) + ":00 h.";
+        return to_string(Horas) + ":00 h.";
     }
 
+}
+
+bool Hora::operator<(Hora otra)
+{
+    if (Horas < otra.Horas)
+    {
+        return true;
+    }
+    if (Horas == otra.Horas && Minutos < otra.Minutos)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool Hora::operator<=(Hora otra)
+{
+    return Horas < otra.Horas || Horas == otra.Horas;
+}
+
+bool Hora::operator>(Hora otra)
+{
+    return !(Horas <= otra.Horas);
+}
+
+bool Hora::operator>=(Hora otra)
+{
+    return !(Horas < otra.Horas);
+}
+
+bool Hora::operator==(Hora otra)
+{
+    return (Horas == otra.Horas && Minutos == otra.Minutos);
 }
 

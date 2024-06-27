@@ -16,4 +16,6 @@ public:
     void modificar();
     void eliminar();
     string estadoTurnoToString(int idEstadoTurno);
+    bool esFechaHoraPasada(Fecha fechaTurno, Hora horaTurno);
+    bool esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTurno);
 };

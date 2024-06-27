@@ -18,7 +18,13 @@ public:
     void setHoras(int horas);
     void setMinutos(int minutos);
 
-    //metodo adicional
+    /// METODOS
     void cargar();
-    string toString(); ///
+    string toString();
+    bool operator<(Hora otra);
+    bool operator>(Hora otra);
+    bool operator<=(Hora otra);
+    bool operator>=(Hora otra);
+    bool operator==(Hora otra);
+
 };
