@@ -10,6 +10,9 @@ Turno TurnoManager::crear(){
     cout << "ID del turno: ";
     cin >> idTurno;
 
+    cout << "Fecha del turno: ";
+    fechaTurno.cargar();
+
     cout << "Matricula del profesional: ";
     cin >> matricula;
 
@@ -40,6 +43,10 @@ void TurnoManager::cargar(Turno &turno) {
     cin >> idTurno;
     turno.setIdTurno(idTurno);
 
+    cout << "Fecha del turno: ";
+    fechaTurno.cargar();
+    turno.setFechaTurno(fechaTurno);
+
     cout << "Matricula del profesional: ";
     cin >> matricula;
     turno.setMatricula(matricula);
@@ -60,7 +67,7 @@ void TurnoManager::cargar(Turno &turno) {
     horaTurno.cargar();
     turno.setHoraTurno(horaTurno);
 
-    cout << "Ingrese el ID del estado del turno (0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado)";
+    cout << "Ingrese el ID del estado del turno (0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
     turno.setIdEstadoTurno(idEstadoTurno);
 
@@ -73,6 +80,7 @@ void TurnoManager::mostrar(Turno turno)
     if (turno.getEstado())
     {
         cout << "ID del turno: " << turno.getIdTurno() << endl;
+        cout << "Fecha del turno: " << turno.getFechaTurno().toString() << endl;
         cout << "Matricula del profesional: " << turno.getIdTurno() << endl;
         cout << "Dni del paciente: " << turno.getDni() << endl;
         cout << "Id especialidad a atenderse: " << turno.getIdEspecialidad() << endl;

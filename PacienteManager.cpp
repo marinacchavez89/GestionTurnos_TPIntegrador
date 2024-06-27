@@ -93,13 +93,13 @@ void PacienteManager::cargar(Paciente &paciente) {
     cin >> genero;
     paciente.setGenero(genero);
 
-    cout << "Número de historia clínica: ";
-    cin >> nroHistoriaClinica;
-    paciente.setNroHistoriaClinica(nroHistoriaClinica);
-
     cout << "Porcentaje de cobertura: ";
     cin >> porcCobertura;
     paciente.setPorcCobertura(porcCobertura);
+
+    cout << "Número de historia clínica: ";
+    cin >> nroHistoriaClinica;
+    paciente.setNroHistoriaClinica(nroHistoriaClinica);
 
     cout << "Email: ";
     cin.ignore();
@@ -121,8 +121,8 @@ void PacienteManager::mostrar(Paciente paciente)
         cout << "Direccion: " << paciente.getDireccion() << endl;
         cout << "Telefono: " << paciente.getTelefono() << endl;
         cout << "Genero: " << paciente.getGenero() << endl;
-        cout << "Nro de historia clinica: " << paciente.getNroHistoriaClinica() << endl;
         cout << "Porcentaje de cobertura: " << paciente.getPorcCobertura() << endl;
+        cout << "Nro de historia clinica: " << paciente.getNroHistoriaClinica() << endl;
         cout << "Email: " << paciente.getEmail() << endl;
     }
 }

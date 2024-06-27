@@ -179,7 +179,7 @@
 	<iostream>
 	"PacienteArchivo.h"
 
-1719406674 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
+1719507292 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
 	<iostream>
 	"PacienteManager.h"
 
@@ -203,7 +203,7 @@
 	<iostream>
 	"TurnoArchivo.h"
 
-1719504132 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
+1719508071 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
 	<iostream>
 	"TurnoManager.h"
 
