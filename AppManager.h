@@ -17,6 +17,8 @@
 #include "PacienteManager.h"
 #include "HorariosProfesionalesArchivo.h"
 #include "HorariosProfesionalesManager.h"
+#include "TurnoArchivo.h"
+#include "TurnoManager.h"
 
 using namespace std;
 
@@ -32,6 +34,8 @@ private:
     PacienteManager managerPaciente;
     HorariosProfesionalesArchivo archiHorariosProf;
     HorariosProfesionalesManager managerHorariosProf;
+    TurnoArchivo archiTurno;
+    TurnoManager managerTurno;
 public:
     void configurarConsola();
     void dibujarEncabezado();
@@ -122,16 +126,20 @@ void AppManager::menuABMTurnos(){
         switch(opcionTurnos)
         {
         case 1:
-            //Llamar a la funcion correspondiente.
+            managerTurno.agregar();
+            system("pause");
             break;
         case 2:
-            //Llamar a la funcion correspondiente.
+            managerTurno.modificar();
+            system("pause");
             break;
         case 3:
-            //Llamar a la funcion correspondiente.
+            managerTurno.eliminar();
+            system("pause");
             break;
         case 4:
-            //Llamar a la funcion correspondiente.
+            managerTurno.listar();
+            system("pause");
             break;
         case 5:
             managerEstadoTurnos.agregar();

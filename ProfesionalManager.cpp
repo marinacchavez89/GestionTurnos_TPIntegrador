@@ -145,12 +145,16 @@ void ProfesionalManager::mostrar(Profesional prof)
 
 void ProfesionalManager::agregar()
 {
-    if(archiProf.guardar(crear()))
-    {
-        cout << "¡El profesional fue guardado con éxito!" << endl;
+    Profesional nuevoProfesional = crear();
+
+    if (archiProf.buscarByMatricula(nuevoProfesional.getMatricula()) != -1) {
+        cout << "Ya existe el registro. No se puede duplicar." << endl;
+        return;
     }
-    else
-    {
+
+    if (archiProf.guardar(nuevoProfesional)) {
+        cout << "¡El profesional fue guardado con éxito!" << endl;
+    } else {
         cout << "No se pudo guardar el profesional." << endl;
     }
 }

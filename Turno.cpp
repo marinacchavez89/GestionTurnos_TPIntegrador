@@ -6,19 +6,23 @@ using namespace std;
 
 /// CONSTRUCTOR VACIO
 Turno::Turno()
-    : FechaTurno(), Matricula(0), Dni(0), IdEspecialidad(0), IdConsultorio(0), IdCobertura(0), HoraTurno(), IdEstadoTurno(0), Estado()
+    : IdTurno(),FechaTurno(), Matricula(0), Dni(0), IdEspecialidad(0), Consultorio(0), HoraTurno(), IdEstadoTurno(0), Estado()
 {
 }
 
 /// CONSTRUCTOR CON PARAMETROS
-Turno::Turno(Fecha fechaTurno, int matricula, int dni, int idEspecialidad, int idConsultorio, int idCobertura,
-             Hora horaTurno, int estadoTurno, bool estado)
-    : FechaTurno(fechaTurno), Matricula(matricula), Dni(dni), IdEspecialidad(idEspecialidad), IdConsultorio(idConsultorio),
-      IdCobertura(idCobertura), HoraTurno(horaTurno), IdEstadoTurno(estadoTurno), Estado(estado)
+Turno::Turno(int idTurno, Fecha fechaTurno, int matricula, int dni, int idEspecialidad, int consultorio,
+             Hora horaTurno, int idEstadoTurno, bool estado)
+    : IdTurno(idTurno), FechaTurno(fechaTurno), Matricula(matricula), Dni(dni), IdEspecialidad(idEspecialidad), Consultorio(consultorio),
+      HoraTurno(horaTurno), IdEstadoTurno(idEstadoTurno), Estado(estado)
 {
 }
 
 /// GETTERS
+int Turno::getIdTurno()
+{
+    return IdTurno;
+}
 Fecha Turno::getFechaTurno()
 {
     return FechaTurno;
@@ -35,19 +39,15 @@ int Turno::getIdEspecialidad()
 {
     return IdEspecialidad;
 }
-int Turno::getIdConsultorio()
+int Turno::getConsultorio()
 {
-    return IdConsultorio;
-}
-int Turno::getIdCobertura()
-{
-    return IdCobertura;
+    return Consultorio;
 }
 Hora Turno::getHoraTurno()
 {
     return HoraTurno;
 }
-int Turno::getEstadoTurno()
+int Turno::getIdEstadoTurno()
 {
     return IdEstadoTurno;
 }
@@ -58,6 +58,10 @@ bool Turno::getEstado()
 
 
 /// SETTERS
+void Turno::setIdTurno(int idTurno)
+{
+    IdTurno = idTurno;
+}
 void Turno::setFechaTurno(Fecha fechaTurno)
 {
     FechaTurno = fechaTurno;
@@ -74,19 +78,15 @@ void Turno::setIdEspecialidad(int idEspecialidad)
 {
     IdEspecialidad = idEspecialidad;
 }
-void Turno::setIdConsultorio(int idConsultorio)
+void Turno::setConsultorio(int consultorio)
 {
-    IdConsultorio = idConsultorio;
-}
-void Turno::setIdCobertura(int idCobertura)
-{
-    IdCobertura = idCobertura;
+    Consultorio = consultorio;
 }
 void Turno::setHoraTurno(Hora horaTurno)
 {
     HoraTurno = horaTurno;
 }
-void Turno::setEstadoTurno(int estadoTurno)
+void Turno::setIdEstadoTurno(int estadoTurno)
 {
     IdEstadoTurno = estadoTurno;
 }

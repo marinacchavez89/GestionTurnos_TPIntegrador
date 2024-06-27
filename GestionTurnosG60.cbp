@@ -73,6 +73,10 @@
 		<Unit filename="ProfesionalManager.h" />
 		<Unit filename="Turno.cpp" />
 		<Unit filename="Turno.h" />
+		<Unit filename="TurnoArchivo.cpp" />
+		<Unit filename="TurnoArchivo.h" />
+		<Unit filename="TurnoManager.cpp" />
+		<Unit filename="TurnoManager.h" />
 		<Unit filename="funciones.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>

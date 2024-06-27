@@ -6,12 +6,12 @@
 class Turno
 {
 private:
+    int IdTurno;
     Fecha FechaTurno;
     int Matricula;
     int Dni;
     int IdEspecialidad;
-    int IdConsultorio;
-    int IdCobertura;
+    int Consultorio;
     Hora HoraTurno;
     int IdEstadoTurno;
     bool Estado;
@@ -19,28 +19,28 @@ private:
 public:
     /// CONSTRUCTOR
     Turno();
-    Turno(Fecha fechaTurno, int matricula, int dni, int idEspecialidad, int idConsultorio, int idCobertura,
-          Hora horaTurno, int estadoTurno, bool estado);
+    Turno(int idTurno,Fecha fechaTurno, int matricula, int dni, int idEspecialidad, int consultorio,
+          Hora horaTurno, int idEstadoTurno, bool estado);
 
     /// GETTERS
+    int getIdTurno();
     Fecha getFechaTurno();
     int getMatricula();
     int getDni();
     int getIdEspecialidad();
-    int getIdConsultorio();
-    int getIdCobertura();
+    int getConsultorio();
     Hora getHoraTurno();
-    int getEstadoTurno();
+    int getIdEstadoTurno();
     bool getEstado();
 
     /// SETTERS
+    void setIdTurno(int idTurno);
     void setFechaTurno(Fecha fechaTurno);
     void setMatricula(int matricula);
     void setDni(int dni);
     void setIdEspecialidad(int idEspecialidad);
-    void setIdConsultorio(int idConsultorio);
-    void setIdCobertura(int idCobertura);
+    void setConsultorio(int consultorio);
     void setHoraTurno(Hora horaTurno);
-    void setEstadoTurno(int estadoTurno);
+    void setIdEstadoTurno(int idEstadoTurno);
     void setEstado(bool estado);
 };
