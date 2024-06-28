@@ -1,5 +1,4 @@
 #pragma once
-#include "HorariosProfesionales.h"
 #include <string>
 #include "Hora.h"
 

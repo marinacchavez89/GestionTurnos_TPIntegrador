@@ -97,7 +97,7 @@ int PacienteArchivo::buscarByDni(int dni)
 
     while(fread(&reg, sizeof(Paciente), 1, pFile))
     {
-        if(reg.getDni() == dni)
+        if(reg.getDni() == dni && reg.getEstado())
         {
             fclose(pFile);
             return pos;

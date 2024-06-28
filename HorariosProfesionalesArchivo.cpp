@@ -94,7 +94,7 @@ int HorariosProfesionalesArchivo::buscarByMatricula(int matricula)
 
     while(fread(&reg, sizeof(HorariosProfesionales), 1, pFile))
     {
-        if(reg.getMatricula() == matricula)
+        if(reg.getMatricula() == matricula && reg.getEstado())
         {
             fclose(pFile);
             return pos;

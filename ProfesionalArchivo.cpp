@@ -94,7 +94,7 @@ int ProfesionalArchivo::buscarByMatricula(int mat)
 
     while(fread(&reg, sizeof(Profesional), 1, pFile))
     {
-        if(reg.getMatricula() == mat)
+        if(reg.getMatricula() == mat && reg.getEstado())
         {
             fclose(pFile);
             return pos;

@@ -3,8 +3,10 @@
 using namespace std;
 #include "TurnoManager.h"
 #include "HorariosProfesionalesArchivo.h"
+#include "PacienteArchivo.h"
 
-Turno TurnoManager::crear(){
+Turno TurnoManager::crear()
+{
     int idTurno, matricula, dni, idEspecialidad, consultorio, idEstadoTurno;
     Fecha fechaTurno;
     Hora horaTurno;
@@ -37,7 +39,8 @@ Turno TurnoManager::crear(){
     return Turno(idTurno, fechaTurno, matricula, dni, idEspecialidad, consultorio, horaTurno, idEstadoTurno, true);
 }
 
-void TurnoManager::cargar(Turno &turno) {
+void TurnoManager::cargar(Turno &turno)
+{
     int idTurno, matricula, dni, idEspecialiad, consultorio, idEstadoTurno;
     Fecha fechaTurno;
     Hora horaTurno;
@@ -85,7 +88,7 @@ void TurnoManager::mostrar(Turno turno)
     {
         cout << "ID del turno: " << turno.getIdTurno() << endl;
         cout << "Fecha del turno: " << turno.getFechaTurno().toString() << endl;
-        cout << "Matricula del profesional: " << turno.getIdTurno() << endl;
+        cout << "Matricula del profesional: " << turno.getMatricula() << endl;
         cout << "Dni del paciente: " << turno.getDni() << endl;
         cout << "Id especialidad a atenderse: " << turno.getIdEspecialidad() << endl;
         cout << "Consultorio de atención: " << turno.getConsultorio() << endl;
@@ -106,34 +109,65 @@ void TurnoManager::agregar()
 
 
     if (nuevoTurno.getFechaTurno() < fechaActual ||
-        (nuevoTurno.getFechaTurno() == fechaActual && nuevoTurno.getHoraTurno() < horaActual)) {
+            (nuevoTurno.getFechaTurno() == fechaActual && nuevoTurno.getHoraTurno() < horaActual))
+    {
         cout << "La fecha elegida, es una fecha caducada." << endl;
         return;
     }
 
     HorariosProfesionalesArchivo horariosProfesionalArchivo;
     int index = horariosProfesionalArchivo.buscarByMatricula(nuevoTurno.getMatricula());
-    if (index == -1) {
+    if (index == -1)
+    {
         cout << "No se encontró el horario del profesional." << endl;
         return;
     }
 
     HorariosProfesionales horarioProfesional = horariosProfesionalArchivo.leer(index);
-    if (horarioProfesional.getDiaAtencion() != nuevoTurno.getFechaTurno().getDia() ||
-        !(horarioProfesional.getHoraInicio() <= nuevoTurno.getHoraTurno() && nuevoTurno.getHoraTurno() <= horarioProfesional.getHoraFin())) {
+    int dia = nuevoTurno.getFechaTurno().getDia();
+    int mes = nuevoTurno.getFechaTurno().getMes();
+    int anio = nuevoTurno.getFechaTurno().getAnio();
+    int diaAValidar = obtenerDiaSemana(dia, mes, anio);
+    if (horarioProfesional.getDiaAtencion() != diaAValidar ||
+            !(horarioProfesional.getHoraInicio() <= nuevoTurno.getHoraTurno() && nuevoTurno.getHoraTurno() <= horarioProfesional.getHoraFin()))
+    {
         cout << "El profesional no atiende en el horario seleccionado." << endl;
         return;
     }
 
-    if (archiTurno.buscarByID(nuevoTurno.getIdTurno()) != -1) {
+    PacienteArchivo pacienteArchivo;
+    int indexPaciente = pacienteArchivo.buscarByDni(nuevoTurno.getDni());
+    if (indexPaciente == -1)
+    {
+        cout << "No se encontró el paciente. Darlo de alta de ser necesario." << endl;
+        return;
+    }
+
+    if (archiTurno.buscarByID(nuevoTurno.getIdTurno()) != -1)
+    {
         cout << "Ya existe el registro. No se puede duplicar." << endl;
         return;
     }
 
-    if (archiTurno.guardar(nuevoTurno)) {
+    if(turnoAsignado(nuevoTurno))
+    {
+        cout << "Turno ya asignado." << endl;
+        return;
+    }
+
+    if (archiTurno.buscarByID(nuevoTurno.getIdTurno()) != -1)
+    {
+        cout << "Ya existe el registro. No se puede duplicar." << endl;
+        return;
+    }
+
+    if (archiTurno.guardar(nuevoTurno))
+    {
         cout << "¡El turno fue agendado con éxito!" << endl;
-    } else {
-        cout << "No se pudo agendar el turno." << endl;
+    }
+    else
+    {
+        cout << "No se pudo agendar el turno. Turno ya asignado." << endl;
     }
 }
 
@@ -239,6 +273,40 @@ void TurnoManager::eliminar()
     }
 }
 
+bool TurnoManager::turnoAsignado(Turno turnoAEvaluar)
+{
+    int cantidad = archiTurno.getCantidadRegistros();
+    Turno *turnos;
+
+    turnos = new Turno[cantidad];
+
+    if(turnos == nullptr)
+    {
+        cout << "No hay espacio en memoria." << endl;
+        return false;
+    }
+
+    archiTurno.leerTodos(turnos, cantidad);
+
+    for(int i=0; i<cantidad; i++)
+    {
+        if(turnos[i].getIdEstadoTurno()==1 && turnos[i].getEstado())
+        {
+            if(turnos[i].getFechaTurno() == turnoAEvaluar.getFechaTurno() &&
+                    turnos[i].getMatricula() == turnoAEvaluar.getMatricula() &&
+                    turnos[i].getHoraTurno() == turnoAEvaluar.getHoraTurno())
+            {
+                delete [] turnos;
+                return true;
+            }
+        }
+
+    }
+
+    delete [] turnos;
+    return false;
+}
+
 string TurnoManager::estadoTurnoToString(int idEstadoTurno)
 {
     string descripEstadoTurno = "";
@@ -266,30 +334,38 @@ string TurnoManager::estadoTurnoToString(int idEstadoTurno)
     return descripEstadoTurno;
 }
 
-bool TurnoManager::esFechaHoraPasada(Fecha fechaTurno, Hora horaTurno) {
+bool TurnoManager::esFechaHoraPasada(Fecha fechaTurno, Hora horaTurno)
+{
     time_t t = time(0);
     tm* now = localtime(&t);
 
     Fecha fechaActual(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
     Hora horaActual(now->tm_hour, now->tm_min);
 
-    if (fechaTurno < fechaActual) {
+    if (fechaTurno < fechaActual)
+    {
         return true;
-    } else if (fechaTurno == fechaActual && horaTurno < horaActual) {
+    }
+    else if (fechaTurno == fechaActual && horaTurno < horaActual)
+    {
         return true;
     }
     return false;
 }
 
-bool TurnoManager::esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTurno) {
+bool TurnoManager::esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTurno)
+{
     HorariosProfesionalesArchivo horariosArchivo;
     int cantidadHorarios = horariosArchivo.getCantidadRegistros();
     HorariosProfesionales* horarios = new HorariosProfesionales[cantidadHorarios];
     horariosArchivo.leerTodos(horarios, cantidadHorarios);
 
-    for (int i = 0; i < cantidadHorarios; i++) {
-        if (horarios[i].getMatricula() == matricula && horarios[i].getDiaAtencion() == fechaTurno.getDia()) {
-            if (horaTurno >= horarios[i].getHoraInicio() && horaTurno <= horarios[i].getHoraFin()) {
+    for (int i = 0; i < cantidadHorarios; i++)
+    {
+        if (horarios[i].getMatricula() == matricula && horarios[i].getDiaAtencion() == fechaTurno.getDia())
+        {
+            if (horaTurno >= horarios[i].getHoraInicio() && horaTurno <= horarios[i].getHoraFin())
+            {
                 delete[] horarios;
                 return true;
             }
@@ -298,4 +374,29 @@ bool TurnoManager::esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTur
 
     delete[] horarios;
     return false;
+}
+
+int TurnoManager::obtenerDiaSemana(int dia, int mes, int anio)
+{
+    struct tm date = {};
+    date.tm_year = anio - 1900;
+    date.tm_mon = mes - 1;
+    date.tm_mday = dia;
+    date.tm_isdst = -1;
+
+    if (mktime(&date) == -1)
+    {
+        std::cerr << "Error al convertir la fecha." << std::endl;
+        return -1;
+    }
+
+    int diaSemana = date.tm_wday;
+
+    // Convertir diaSemana de 0-6 a 1-7
+    if (diaSemana == 0)
+    {
+        diaSemana = 7;
+    }
+
+    return diaSemana;
 }

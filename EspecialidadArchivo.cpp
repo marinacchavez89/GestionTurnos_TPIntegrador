@@ -93,7 +93,7 @@ int EspecialidadArchivo::buscarByID(int idEspecialidad)
 
     while(fread(&reg, sizeof(Especialidad), 1, pFile))
     {
-        if(reg.getIdEspecialidad() == idEspecialidad)
+        if(reg.getIdEspecialidad() == idEspecialidad && reg.getEstado())
         {
             fclose(pFile);
             return pos;

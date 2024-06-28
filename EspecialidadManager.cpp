@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "EspecialidadManager.h"
+#include "Utils.h"
 
 Especialidad EspecialidadManager::crear(){
     int idEspecialidad;
@@ -23,6 +24,7 @@ void EspecialidadManager::cargar(Especialidad &espe) {
 
     cout << "ID Especialidad: ";
     cin >> idEspecialidad;
+
     espe.setIdEspecialidad(idEspecialidad);
 
     cout << "Descripción: ";

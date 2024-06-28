@@ -15,7 +15,9 @@ public:
     void listar();
     void modificar();
     void eliminar();
+    bool turnoAsignado(Turno turnoAEvaluar);
     string estadoTurnoToString(int idEstadoTurno);
     bool esFechaHoraPasada(Fecha fechaTurno, Hora horaTurno);
     bool esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTurno);
+    int obtenerDiaSemana(int dia, int mes, int anio);
 };

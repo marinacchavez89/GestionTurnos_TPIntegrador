@@ -94,7 +94,7 @@ int EstadoTurnoArchivo::buscarByID(int idEstadoTurno)
 
     while(fread(&reg, sizeof(EstadoTurno), 1, pFile))
     {
-        if(reg.getIdEstadoTurno() == idEstadoTurno)
+        if(reg.getIdEstadoTurno() == idEstadoTurno && reg.getEstado())
         {
             fclose(pFile);
             return pos;
