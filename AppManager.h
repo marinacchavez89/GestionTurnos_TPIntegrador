@@ -7,6 +7,8 @@
 #include <ctime>
 #include <conio.h>
 #include <windows.h>
+#include "LoginArchivo.h"
+#include "LoginManager.h"
 #include "ProfesionalArchivo.h"
 #include "ProfesionalManager.h"
 #include "EspecialidadArchivo.h"
@@ -24,6 +26,8 @@ using namespace std;
 
 class AppManager{
 private:
+    LoginArchivo archiLogin;
+    LoginManager managerLogin;
     ProfesionalArchivo archiProf;
     ProfesionalManager managerProfesional;
     EspecialidadArchivo archiEspe;
@@ -47,7 +51,53 @@ public:
     void menuABMAgendaProfesionales();
     void menuPrincipal();
     void errorOpcion();
+    int menuLogin();
+    void menuABMUsuarios();
 };
+
+int AppManager::menuLogin(){
+
+    int legajo, pass;
+    int esAdmin;
+
+    system("cls");
+    dibujarEncabezado();
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                                   LOGIN                                       |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "Ingrese Legajo (Solo números)" << endl;
+    cin >> legajo;
+    cout << "Ingrese contraseña" << endl;
+    cin >> pass;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+
+    Login evaluarUser = managerLogin.listar(legajo);
+
+    if (evaluarUser.getLegajo() == legajo && evaluarUser.getPass() == pass)
+    {
+        if (evaluarUser.getUser() == 1)
+        {
+            esAdmin = 1;
+        }
+        else if (evaluarUser.getUser() == 2)
+        {
+            esAdmin = 2;
+        }
+        else
+        {
+            esAdmin = 3;
+        }
+    }
+    else
+    {
+        esAdmin = 3;
+    }
+
+    return esAdmin;
+
+}
 void AppManager::configurarConsola(){
     // Cambiar el tamaño de la ventana de la consola
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -99,7 +149,53 @@ void AppManager::errorOpcion(){
     cout<<"Ingrese una opción correcta del menu."<<endl;
     system("pause");
 }
+void AppManager::menuABMUsuarios(){
+    int opcionUsuarios;
+    do
+    {
+        dibujarEncabezado();
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                                 MENU USUARIOS                                 |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "1  - Alta usuario" << endl;
+        cout << "2  - Modificar usuario" << endl;
+        cout << "3  - Eliminar usuario" << endl;
+        cout << "4  - Listar usuario" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+        cout << "0  - VOLVER MENU PRINCIPAL" << endl;
+        cout << "Opcion: "<< endl;
+        cin >> opcionUsuarios;
 
+        switch(opcionUsuarios)
+        {
+        case 1:
+            managerLogin.agregar();
+            system("pause");
+            break;
+        case 2:
+            managerLogin.modificar();
+            system("pause");
+            break;
+        case 3:
+            managerLogin.eliminar();
+            system("pause");
+            break;
+        case 4:
+            managerLogin.listar();
+            system("pause");
+            break;
+        case 0:
+            return;
+        default:
+            errorOpcion();
+            break;
+        }
+    }
+    while(opcionUsuarios >= 0 || opcionUsuarios <= 4);
+
+}
 void AppManager::menuABMTurnos(){
     int opcionTurnos;
     do
@@ -158,8 +254,8 @@ void AppManager::menuABMTurnos(){
             system("pause");
             break;
         case 0:
-            menuPrincipal();
-            break;
+            //menuPrincipal();
+            return;
         default:
             errorOpcion();
             break;
@@ -210,8 +306,7 @@ void AppManager::menuABMProfesionales(){
             //Llamar a la funcion correspondiente.
             break;
         case 0:
-            menuPrincipal();
-            break;
+            return;
         default:
             errorOpcion();
             break;
@@ -262,8 +357,7 @@ void AppManager::menuABMPacientes(){
             //Llamar a la funcion correspondiente.
             break;
         case 0:
-            menuPrincipal();
-            break;
+            return;
         default:
             errorOpcion();
             break;
@@ -315,8 +409,7 @@ void AppManager::menuABMEspecialidades(){
             system("pause");
             break;
         case 0:
-            menuPrincipal();
-            break;
+            return;
         default:
             errorOpcion();
             break;
@@ -326,6 +419,7 @@ void AppManager::menuABMEspecialidades(){
 
 }
 void AppManager::menuABMAgendaProfesionales(){
+
     int opcionAgenda;
     do
     {
@@ -367,8 +461,7 @@ void AppManager::menuABMAgendaProfesionales(){
             //Llamar a la funcion correspondiente.
             break;
         case 0:
-            menuPrincipal();
-            break;
+            return;
         default:
             errorOpcion();
             break;
@@ -377,76 +470,149 @@ void AppManager::menuABMAgendaProfesionales(){
     while(opcionAgenda >= 0 || opcionAgenda <= 5);
 
 }
+void AppManager::menuPrincipal()
+{
+    bool estaLogueado = false;
+    int esAdmin;
+    while (!estaLogueado)
+    {
+        esAdmin = menuLogin();
+        if (esAdmin == 1 || esAdmin == 2)
+        {
+            estaLogueado = true;
+        }
+        else
+        {
+            cout << "Legajo o contraseña incorrecta." << endl;
+            system("pause");
+        }
+    }
 
-
-void AppManager::menuPrincipal(){
     int opcion;
     do
     {
         system("cls");
         dibujarEncabezado();
+        if(esAdmin==1){
         cout << "********************************************************************************" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
-        cout << "|                               MENU PRINCIPAL                                 |" << endl;
+        cout << "|                             MENU ADMINISTRATIVO                               |" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "1  - Administrar turnos" << endl;
         cout << "2  - Administrar profesionales" << endl;
         cout << "3  - Administrar pacientes" << endl;
         cout << "4  - Administrar especialidades" << endl;
         cout << "5  - Administrar agenda profesionales" << endl;
+        cout << "6  - Administrar usuarios" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
+        }
+        if(esAdmin==1 || esAdmin ==2){
         cout << "********************************************************************************" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "|                                MENU REPORTES                                 |" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
-        cout << "6  - Recaudación anual" << endl;
-        cout << "7  - Recaudación por profesional" << endl;
-        cout << "8  - Recaudación por especialidad" << endl;
-        cout << "9  - Cantidad de turnos asignados" << endl;
-        cout << "10 - Administrar agenda profesionales" << endl;
+        cout << "7  - Recaudación anual" << endl;
+        cout << "8  - Recaudación por profesional" << endl;
+        cout << "9  - Recaudación por especialidad" << endl;
+        cout << "10 - Cantidad de turnos asignados" << endl;
+        cout << "11 - Administrar agenda profesionales" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "|                                MENU CONSULTAS                                |" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
-        cout << "11 - Consulta de pacientes" << endl;
-        cout << "12 - Consulta de Profesionales" << endl;
-        cout << "13 - Consulta de turnos" << endl;
+        cout << "12 - Consulta de pacientes" << endl;
+        cout << "13 - Consulta de Profesionales" << endl;
+        cout << "14 - Consulta de turnos" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - SALIR" << endl;
         cout << "Opcion: "<< endl;
         cin >> opcion;
+        }
 
-        switch(opcion)
+        if(esAdmin==1){
+            switch(opcion)
+            {
+            case 1:
+                menuABMTurnos();
+                system("pause");
+                break;
+            case 2:
+                menuABMProfesionales();
+                system("pause");
+                break;
+            case 3:
+                menuABMPacientes();
+                system("pause");
+                break;
+            case 4:
+                menuABMEspecialidades();
+                system("pause");
+                break;
+            case 5:
+                menuABMAgendaProfesionales();
+                system("pause");
+                break;
+            case 6:
+                menuABMUsuarios();
+                system("pause");
+                break;
+            case 0:
+                break;
+            default:
+                break;
+            }
+        }
+
+        if(esAdmin == 1 || esAdmin==2){
+            switch(opcion)
+            {
+            case 7:
+
+                system("pause");
+                break;
+            case 8:
+
+                system("pause");
+                break;
+            case 9:
+
+                system("pause");
+                break;
+            case 10:
+
+                system("pause");
+                break;
+            case 11:
+
+                system("pause");
+                break;
+            case 12:
+
+                system("pause");
+                break;
+            case 13:
+
+                system("pause");
+                break;
+            case 14:
+
+                system("pause");
+                break;
+            case 0:
+                dibujarAdios();
+                break;
+            default:
+                break;
+            }
+        }
+
+        if(esAdmin == 3)
         {
-        case 1:
-            menuABMTurnos();
+            cout << "Legajo inexistente. Intente logearse nuevamente." << endl;
             system("pause");
-            break;
-        case 2:
-            menuABMProfesionales();
-            system("pause");
-            break;
-        case 3:
-            menuABMPacientes();
-            system("pause");
-            break;
-        case 4:
-            menuABMEspecialidades();
-            system("pause");
-            break;
-        case 5:
-            menuABMAgendaProfesionales();
-            system("pause");
-            break;
-        case 0:
-            dibujarAdios();
-            break;
-        default:
-            errorOpcion();
-            menuPrincipal();
-            break;
+            esAdmin = menuLogin();
         }
     }
     while(opcion != 0);

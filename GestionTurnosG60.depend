@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1717034841 source:c:\users\marina_chavez\desktop\gestionturnosg60\main.cpp
+1719606419 source:c:\users\marina_chavez\desktop\gestionturnosg60\main.cpp
 	<iostream>
 	<locale.h>
 	<cstring>
@@ -16,13 +16,15 @@
 	<conio.h>
 	<windows.h>
 
-1719510798 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
+1719612040 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
 	<iostream>
 	<locale.h>
 	<cstring>
 	<ctime>
 	<conio.h>
 	<windows.h>
+	"LoginArchivo.h"
+	"LoginManager.h"
 	"ProfesionalArchivo.h"
 	"ProfesionalManager.h"
 	"EspecialidadArchivo.h"
@@ -218,4 +220,25 @@
 	"TurnoArchivo.h"
 
 1719533102 c:\users\marina_chavez\desktop\gestionturnosg60\utils.h
+
+1719599980 source:c:\users\marina_chavez\desktop\gestionturnosg60\loginarchivo.cpp
+	<iostream>
+	"LoginArchivo.h"
+
+1719599948 c:\users\marina_chavez\desktop\gestionturnosg60\loginarchivo.h
+	"Login.h"
+
+1719600831 c:\users\marina_chavez\desktop\gestionturnosg60\login.h
+
+1719605179 source:c:\users\marina_chavez\desktop\gestionturnosg60\loginmanager.cpp
+	<iostream>
+	"LoginManager.h"
+
+1719602306 c:\users\marina_chavez\desktop\gestionturnosg60\loginmanager.h
+	"Login.h"
+	"LoginArchivo.h"
+
+1719600734 source:c:\users\marina_chavez\desktop\gestionturnosg60\login.cpp
+	<iostream>
+	"Login.h"
 

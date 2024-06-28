@@ -18,7 +18,5 @@ int main()
     appManager.configurarConsola();
     appManager.menuPrincipal();
 
-
-
     return 0;
 }
