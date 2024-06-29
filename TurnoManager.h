@@ -20,4 +20,6 @@ public:
     bool esFechaHoraPasada(Fecha fechaTurno, Hora horaTurno);
     bool esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTurno);
     int obtenerDiaSemana(int dia, int mes, int anio);
+    string descripMes(int mesNro);
+    void recaudacionAnual(int anio);
 };

@@ -6,7 +6,7 @@ using namespace std;
 
 /// CONSTRUCTOR VACIO
 Turno::Turno()
-    : IdTurno(),FechaTurno(), Matricula(0), Dni(0), IdEspecialidad(0), Consultorio(0), HoraTurno(), IdEstadoTurno(0), Estado()
+    : IdTurno(),FechaTurno(), Matricula(), Dni(), IdEspecialidad(), Consultorio(), HoraTurno(), IdEstadoTurno(0), Estado()
 {
 }
 

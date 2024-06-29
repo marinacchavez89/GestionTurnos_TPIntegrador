@@ -1,9 +1,11 @@
 #include <iostream>
 #include <ctime>
+#include <iomanip>
 using namespace std;
 #include "TurnoManager.h"
 #include "HorariosProfesionalesArchivo.h"
 #include "PacienteArchivo.h"
+#include "ProfesionalArchivo.h"
 
 Turno TurnoManager::crear()
 {
@@ -399,4 +401,94 @@ int TurnoManager::obtenerDiaSemana(int dia, int mes, int anio)
     }
 
     return diaSemana;
+}
+
+string TurnoManager::descripMes(int mesNro){
+
+    string descripMes = "";
+    switch(mesNro){
+
+        case 1:
+            descripMes = "Enero";
+            break;
+        case 2:
+            descripMes = "Febrero";
+            break;
+        case 3:
+            descripMes = "Marzo";
+            break;
+        case 4:
+            descripMes = "Abril";
+            break;
+        case 5:
+            descripMes = "Mayo";
+            break;
+        case 6:
+            descripMes = "Junio";
+            break;
+        case 7:
+            descripMes = "Julio";
+            break;
+        case 8:
+            descripMes = "Agosto";
+            break;
+        case 9:
+            descripMes = "Septiembre";
+            break;
+        case 10:
+            descripMes = "Octubre";
+            break;
+        case 11:
+            descripMes = "Noviembre";
+            break;
+        case 12:
+            descripMes = "Diciembre";
+            break;
+    }
+
+    return descripMes;
+
+}
+
+void TurnoManager::recaudacionAnual(int anio){
+    TurnoArchivo archiTurnos;
+    Turno regTurno;
+    int cantRegTurnos = archiTurnos.getCantidadRegistros();
+
+    ProfesionalArchivo archiProf;
+    Profesional regProfesional;
+    int cantRegProfesionales = archiProf.getCantidadRegistros();
+
+    float acuRecaudacionMeses[12] = {};
+    float acuRecTotal = 0;
+
+    for(int i = 0; i < cantRegTurnos ; i++){
+        regTurno = archiTurnos.leer(i);
+
+        if(regTurno.getFechaTurno().getAnio() == anio && regTurno.getIdEstadoTurno() == 3){
+
+            for(int j = 0; j < cantRegProfesionales; j++){
+                regProfesional = archiProf.leer(j);
+
+                if(regTurno.getMatricula() == regProfesional.getMatricula() && regProfesional.getEstado()){
+
+                    if(regTurno.getEstado()){
+                        acuRecaudacionMeses[regTurno.getFechaTurno().getMes() - 1] += regProfesional.getHonorario();
+                        acuRecTotal+=regProfesional.getHonorario();
+                    }
+                }
+            }
+        }
+    }
+    cout << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
+    cout << setw(10) << left << "MES" << setw(40) << right << "RECAUDACIÓN" << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
+
+    for(int i = 0; i < 12; i++){
+        cout << setw(10) << left << descripMes(i+1) << setw(30) << right << "$" << acuRecaudacionMeses[i] << endl;
+    }
+
+    cout << "-------------------------------------------------------------------------" << endl;
+    cout << setw(10) << left << "TOTAL" << setw(30) << right << "$" << acuRecTotal << endl;
 }

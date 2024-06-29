@@ -22,15 +22,18 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="../../../../curl/curl-8.8.0_2-win64-mingw" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="../../../../curl/curl-8.8.0_2-win64-mingw/lib/libcurl.a" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-DCURL_STATICLIB" />
 		</Compiler>
 		<Unit filename="AppManager.h" />
 		<Unit filename="Especialidad.cpp" />

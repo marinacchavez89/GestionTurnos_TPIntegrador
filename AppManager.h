@@ -470,8 +470,7 @@ void AppManager::menuABMAgendaProfesionales(){
     while(opcionAgenda >= 0 || opcionAgenda <= 5);
 
 }
-void AppManager::menuPrincipal()
-{
+void AppManager::menuPrincipal(){
     bool estaLogueado = false;
     int esAdmin;
     while (!estaLogueado)
@@ -556,6 +555,14 @@ void AppManager::menuPrincipal()
                 break;
             case 6:
                 menuABMUsuarios();
+                system("pause");
+                break;
+            case 7:
+                system("cls");
+                int anio;
+                cout << "Ingrese el año que desea consultar su recaudación anual: " << endl;
+                cin >> anio;
+                managerTurno.recaudacionAnual(anio);
                 system("pause");
                 break;
             case 0:
