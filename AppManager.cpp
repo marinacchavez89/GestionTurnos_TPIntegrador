@@ -515,7 +515,73 @@ void AppManager::menuConsultasPacientes()
 }
 void AppManager::menuConsultasProfesionales()
 {
+    int opcionProfesionalesConsultas;
+    do
+    {
+        dibujarEncabezado();
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                        MENU CONSULTAS PROFESIONALES                           |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "1  - Buscar profesional por matricula" << endl;
+        cout << "2  - Buscar profesional por apellido" << endl;
+        cout << "3  - Buscar profesional por especialidad" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+        cout << "0  - VOLVER MENU PRINCIPAL" << endl;
+        cout << "Opcion: "<< endl;
+        cin >> opcionProfesionalesConsultas;
 
+        switch(opcionProfesionalesConsultas)
+        {
+        case 1:
+            {
+                system("cls");
+                int matricula;
+                cout << "Ingrese la matricula del profesional:" << endl;
+                cin >> matricula;
+                managerProfesional.buscarByMatricula(matricula);
+                cout << endl;
+                system("pause");
+                break;
+            }
+        case 2:
+            {
+                system("cls");
+                cin.ignore();
+                string apellido;
+                cout << "Ingrese el apellido del profesional:" << endl;
+                getline(cin, apellido);
+                string apellidoMayus = toUpperCase(apellido);
+                managerProfesional.buscarPorApellido(apellidoMayus);
+                cout << endl;
+                system("pause");
+                break;
+            }
+            system("pause");
+            break;
+        case 3:
+            {
+                system("cls");
+                cin.ignore();
+                int especialidad;
+                cout << "Ingrese el ID de la especialidad del profesional:" << endl;
+                cin >> especialidad;
+                managerProfesional.buscarPorEspecialidad(especialidad);
+                cout << endl;
+                system("pause");
+                break;
+            }
+            system("pause");
+            break;
+        case 0:
+            return;
+        default:
+            errorOpcion();
+            break;
+        }
+    }
+    while(opcionProfesionalesConsultas >= 0 || opcionProfesionalesConsultas <= 3);
 }
 void AppManager::menuConsultasTurnos()
 {

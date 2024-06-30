@@ -262,3 +262,118 @@ void ProfesionalManager::eliminar()
     }
 }
 
+void ProfesionalManager::buscarByMatricula(int matricula){
+
+    int profesionalIndex = archiProf.buscarByMatricula(matricula);
+
+    while(profesionalIndex == -1) {
+        system("cls");
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                  PROFESIONAL INEXISTENTE. VERIFIQUE MATRICULA.                |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+        cout << "Ingrese la matricula del profesional: ";
+        cin >> matricula;
+        profesionalIndex = archiProf.buscarByMatricula(matricula);
+    }
+    system("cls");
+    Profesional profesional = archiProf.leer(profesionalIndex);
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                          INFORMACION DEL PROFESIONAL                          |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+    mostrar(profesional);
+}
+
+void ProfesionalManager::buscarPorApellido(string apellido){
+
+    int cantidad = archiProf.getCantidadRegistros();
+    Profesional *profesionales;
+
+    profesionales = new Profesional[cantidad];
+
+    if(profesionales == nullptr)
+    {
+        cout << "No hay espacio en memoria." << endl;
+        return;
+    }
+
+    archiProf.leerTodos(profesionales, cantidad);
+    bool encontrado = false;
+
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                        INFORMACION DE LOS PROFESIONALES                       |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+    for(int i=0; i<cantidad; i++)
+    {
+        string apeMayusReg = toUpperCase(profesionales[i].getApellido());
+        string apeEvaluarMayus = toUpperCase(apellido);
+        if(apeMayusReg == apeEvaluarMayus && profesionales[i].getEstado())
+        {
+            cout << "--------------------------------------------------------------------------------" << endl;
+            mostrar(profesionales[i]);
+            cout << "--------------------------------------------------------------------------------"  << endl;
+            encontrado = true;
+        }
+    }
+
+    if (!encontrado) {
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                                 SIN REGISTROS                                 |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+    }
+
+
+    delete [] profesionales;
+}
+
+void ProfesionalManager::buscarPorEspecialidad(int idEspecialidad){
+
+    int cantidad = archiProf.getCantidadRegistros();
+    Profesional *profesionales;
+
+    profesionales = new Profesional[cantidad];
+
+    if(profesionales == nullptr)
+    {
+        cout << "No hay espacio en memoria." << endl;
+        return;
+    }
+
+    archiProf.leerTodos(profesionales, cantidad);
+    bool encontrado = false;
+
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                        INFORMACION DE LOS PROFESIONALES                       |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+    for(int i=0; i<cantidad; i++)
+    {
+        if(profesionales[i].getIdEspecialidad() == idEspecialidad && profesionales[i].getEstado())
+        {
+            cout << "--------------------------------------------------------------------------------" << endl;
+            mostrar(profesionales[i]);
+            cout << "--------------------------------------------------------------------------------"  << endl;
+            encontrado = true;
+        }
+    }
+
+    if (!encontrado) {
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                                 SIN REGISTROS                                 |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+    }
+
+    delete [] profesionales;
+
+}
+

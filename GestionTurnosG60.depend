@@ -131,11 +131,12 @@
 1719404062 c:\users\marina_chavez\desktop\gestionturnosg60\profesionalarchivo.h
 	"Profesional.h"
 
-1718253220 c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.h
+1719767774 c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.h
 	"Profesional.h"
 	"ProfesionalArchivo.h"
+	"Utils.h"
 
-1719487880 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.cpp
+1719768095 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.cpp
 	<iostream>
 	"ProfesionalManager.h"
 
@@ -255,7 +256,7 @@
 	<iostream>
 	"Login.h"
 
-1719720526 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
+1719767533 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
 	"AppManager.h"
 	"Utils.h"
 

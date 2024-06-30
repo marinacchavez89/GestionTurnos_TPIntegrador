@@ -1,6 +1,7 @@
 #pragma once
 #include "Profesional.h"
 #include "ProfesionalArchivo.h"
+#include "Utils.h"
 
 class ProfesionalManager {
 
@@ -15,4 +16,7 @@ public:
     void listar();
     void modificar();
     void eliminar();
+    void buscarByMatricula(int matricula);
+    void buscarPorApellido(string apellido);
+    void buscarPorEspecialidad(int idEspecialidad);
 };
