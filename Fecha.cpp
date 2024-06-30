@@ -56,7 +56,7 @@ void Fecha::cargar()
 {
     cout<<"Ingrese dia: ";
     cin>>Dia;
-    while(Dia<0 || Dia>31){
+    while(Dia<0 || Dia>31 || Dia==0 || Dia ==00){
         cout<<"Dia inválido (01 a 31): ";
         cin>>Dia;
     }
@@ -79,6 +79,18 @@ bool Fecha::operator<(Fecha otra){
     if (Anio == otra.Anio && Mes < otra.Mes) return true;
     if (Anio == otra.Anio && Mes == otra.Mes && Dia < otra.Dia) return true;
     return false;
+}
+
+bool Fecha::operator<=(Fecha otra) {
+    return (*this < otra) || (*this == otra);
+}
+
+bool Fecha::operator>(Fecha otra) {
+    return !(*this <= otra);
+}
+
+bool Fecha::operator>=(Fecha otra) {
+    return !(*this < otra);
 }
 
 bool Fecha::operator==(Fecha otra) {

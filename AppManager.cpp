@@ -585,7 +585,69 @@ void AppManager::menuConsultasProfesionales()
 }
 void AppManager::menuConsultasTurnos()
 {
+    int opcionTurnosConsultas;
+    do
+    {
+        dibujarEncabezado();
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                          MENU CONSULTAS TURNOS                               |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "1  - Consulta de turnos por rango de fechas" << endl;
+        cout << "2  - Consulta de turnos por estado de turnos" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+        cout << "0  - VOLVER MENU PRINCIPAL" << endl;
+        cout << "Opcion: "<< endl;
+        cin >> opcionTurnosConsultas;
 
+        switch(opcionTurnosConsultas)
+        {
+        case 1:
+        {
+            system("cls");
+            cin.ignore();
+            Fecha fechaInicio, fechaFin;
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << endl;
+            cout << "Formato de ingreso de fechas--> Dia: dd - Mes: mm - Año: aaaa " << endl;
+            cout << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
+            cout << endl;
+            cout << "Ingrese fecha desde:" << endl;
+            fechaInicio.cargar();
+            cout << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << endl;
+            cout << "Ingrese fecha hasta:" << endl;
+            fechaFin.cargar();
+            system("cls");
+            managerTurno.consultaPorRangoDeFechas(fechaInicio, fechaFin);
+            cout << endl;
+            system("pause");
+            break;
+        }
+        case 2:
+            system("cls");
+            cin.ignore();
+            int idEstadoTurno;
+            cout << "Ingrese el ID del estado de turno que desea consultar" << endl;
+            cout << "(0: Libre - 1: Otorgado - 2: En curso - 3: Finalizado - 4: Cancelado): " << endl;
+            cin >> idEstadoTurno;
+            managerTurno.consultaPorEstadoTurno(idEstadoTurno);
+            cout << endl;
+            system("pause");
+            break;
+        case 0:
+            return;
+        default:
+            errorOpcion();
+            break;
+        }
+    }
+    while(opcionTurnosConsultas >= 0 && opcionTurnosConsultas <= 2);
 }
 void AppManager::menuPrincipal()
 {

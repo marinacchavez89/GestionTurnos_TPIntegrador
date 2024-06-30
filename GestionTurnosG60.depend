@@ -38,11 +38,11 @@
 	"TurnoArchivo.h"
 	"TurnoManager.h"
 
-1719532428 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
+1719780843 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1719508805 c:\users\marina_chavez\desktop\gestionturnosg60\fecha.h
+1719780870 c:\users\marina_chavez\desktop\gestionturnosg60\fecha.h
 	<string>
 
 1717028857 source:c:\users\marina_chavez\desktop\gestionturnosg60\persona.cpp
@@ -184,7 +184,7 @@
 	<cctype>
 	"PacienteArchivo.h"
 
-1719720540 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
+1719768192 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
 	<iostream>
 	"PacienteManager.h"
 
@@ -208,7 +208,7 @@
 	<iostream>
 	"TurnoArchivo.h"
 
-1719708109 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
+1719780380 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
@@ -223,7 +223,7 @@
 1719489177 c:\users\marina_chavez\desktop\gestionturnosg60\turnoarchivo.h
 	"Turno.h"
 
-1719707335 c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.h
+1719779469 c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.h
 	"Turno.h"
 	"TurnoArchivo.h"
 
@@ -256,7 +256,7 @@
 	<iostream>
 	"Login.h"
 
-1719767533 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
+1719780619 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
 	"AppManager.h"
 	"Utils.h"
 

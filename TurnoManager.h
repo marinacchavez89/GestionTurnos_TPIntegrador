@@ -27,4 +27,6 @@ public:
     void recaudacionPorProfesional(int matricula);
     string descripEspecialidad(int especialidad);
     void recaudacionPorEspecialidad(int especialidad);
+    void consultaPorRangoDeFechas(Fecha fechaInicio, Fecha fechaFin);
+    void consultaPorEstadoTurno(int idEstadoTurno);
 };

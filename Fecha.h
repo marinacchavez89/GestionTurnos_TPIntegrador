@@ -21,5 +21,8 @@ public:
     void cargar();
 
     bool operator<(Fecha otra);
+    bool operator<=(Fecha otra);
+    bool operator>(Fecha otra);
+    bool operator>=(Fecha otra);
     bool operator==(Fecha otra);
 };

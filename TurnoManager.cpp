@@ -753,3 +753,76 @@ void TurnoManager::recaudacionPorEspecialidad(int idEspecialidad)
         cout << endl;
     }
 }
+
+void TurnoManager::consultaPorRangoDeFechas(Fecha fechaInicio, Fecha fechaFin)
+{
+    TurnoArchivo archiTurnos;
+    Turno regTurno;
+    int cantRegTurnos = archiTurnos.getCantidadRegistros();
+
+    bool turnoEncontrado = false;
+
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                        INFORMACION DE LOS TURNOS                              |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+
+    for (int i =0; i<cantRegTurnos; i++)
+    {
+        regTurno = archiTurnos.leer(i);
+
+        if(regTurno.getEstado() && (fechaInicio <= regTurno.getFechaTurno() && regTurno.getFechaTurno() <= fechaFin))
+        {
+            cout << "--------------------------------------------------------------------------------" << endl;
+            mostrar(regTurno);
+            cout << "--------------------------------------------------------------------------------" << endl;
+            turnoEncontrado = true;
+        }
+    }
+    if(!turnoEncontrado)
+    {
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                                 SIN REGISTROS                                 |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+    }
+}
+
+void TurnoManager::consultaPorEstadoTurno(int idEstadoTurno)
+{
+    TurnoArchivo archiTurnos;
+    Turno regTurno;
+    int cantRegTurnos = archiTurnos.getCantidadRegistros();
+
+    bool turnoEncontrado = false;
+
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                        INFORMACION DE LOS TURNOS                              |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+
+    for(int x = 0; x< cantRegTurnos ; x++)
+    {
+        regTurno = archiTurnos.leer(x);
+
+        if(regTurno.getEstado() && regTurno.getIdEstadoTurno() == idEstadoTurno)
+        {
+            cout << "--------------------------------------------------------------------------------" << endl;
+            mostrar(regTurno);
+            cout << "--------------------------------------------------------------------------------" << endl;
+            turnoEncontrado = true;
+        }
+    }
+
+    if(!turnoEncontrado)
+    {
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                                 SIN REGISTROS                                 |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+    }
+}
