@@ -1,4 +1,7 @@
 #pragma once
+using namespace std;
+#include <iostream>
+#include <cstring>
 #include "Login.h"
 #include "LoginArchivo.h"
 

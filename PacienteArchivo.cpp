@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cctype>
 
 using namespace std;
 
@@ -129,3 +130,5 @@ int PacienteArchivo::getCantidadRegistros()
 
     return tam;
 }
+
+

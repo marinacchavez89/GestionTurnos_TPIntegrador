@@ -2,7 +2,8 @@
 #include "Turno.h"
 #include "TurnoArchivo.h"
 
-class TurnoManager {
+class TurnoManager
+{
 
 private:
     TurnoArchivo archiTurno;
@@ -16,10 +17,14 @@ public:
     void modificar();
     void eliminar();
     bool turnoAsignado(Turno turnoAEvaluar);
-    string estadoTurnoToString(int idEstadoTurno);
+    string descripEstadoTurno(int idEstadoTurno);
     bool esFechaHoraPasada(Fecha fechaTurno, Hora horaTurno);
     bool esHorarioValido(int matricula, Fecha fechaTurno, Hora horaTurno);
     int obtenerDiaSemana(int dia, int mes, int anio);
     string descripMes(int mesNro);
     void recaudacionAnual(int anio);
+    void cantidadTurnosAsignados();
+    void recaudacionPorProfesional(int matricula);
+    string descripEspecialidad(int especialidad);
+    void recaudacionPorEspecialidad(int especialidad);
 };

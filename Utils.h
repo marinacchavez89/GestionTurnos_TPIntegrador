@@ -1,5 +1,9 @@
-#ifndef UTILS_H_INCLUDED
-#define UTILS_H_INCLUDED
+#pragma once
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <cctype>
+using namespace std;
 
+string toUpperCase(string palabra);
 
-#endif // UTILS_H_INCLUDED

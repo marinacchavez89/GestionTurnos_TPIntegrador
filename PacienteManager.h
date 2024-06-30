@@ -1,6 +1,7 @@
 #pragma once
 #include "Paciente.h"
 #include "PacienteArchivo.h"
+#include "Utils.h"
 
 class PacienteManager {
 
@@ -15,4 +16,7 @@ public:
     void listar();
     void modificar();
     void eliminar();
+    void buscarByDni(int dni);
+    void buscarPorApellido(string apellido);
+    void buscarPorCobertura(float cobertura);
 };

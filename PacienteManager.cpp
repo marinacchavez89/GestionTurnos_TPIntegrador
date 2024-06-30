@@ -245,3 +245,94 @@ void PacienteManager::eliminar()
         cout << "No se encuentra el paciente con el DNI ingresado." << endl;
     }
 }
+void PacienteManager::buscarByDni(int dni)
+{
+
+    int pacienteIndex = archiPacientes.buscarByDni(dni);
+
+    while(pacienteIndex == -1) {
+        system("cls");
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                     PACIENTE INEXISTENTE. VERIFIQUE DNI.                      |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
+        cout << "Ingrese el DNI del paciente: ";
+        cin >> dni;
+        pacienteIndex = archiPacientes.buscarByDni(dni);
+    }
+    system("cls");
+    Paciente paciente = archiPacientes.leer(pacienteIndex);
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                          INFORMACION DEL PACIENTE                             |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+    mostrar(paciente);
+}
+void PacienteManager:: buscarPorApellido(string apellido)
+{
+    int cantidad = archiPacientes.getCantidadRegistros();
+    Paciente *pacientes;
+
+    pacientes = new Paciente[cantidad];
+
+    if(pacientes == nullptr)
+    {
+        cout << "No hay espacio en memoria." << endl;
+        return;
+    }
+
+    archiPacientes.leerTodos(pacientes, cantidad);
+
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                        INFORMACION DE LOS PACIENTES                           |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+    for(int i=0; i<cantidad; i++)
+    {
+        string apeMayusReg = toUpperCase(pacientes[i].getApellido());
+        string apeEvaluarMayus = toUpperCase(apellido);
+        if(apeMayusReg == apeEvaluarMayus && pacientes[i].getEstado())
+        {
+            cout << "--------------------------------------------------------------------------------" << endl;
+            mostrar(pacientes[i]);
+            cout << "--------------------------------------------------------------------------------"  << endl;
+        }
+    }
+
+    delete [] pacientes;
+}
+void PacienteManager::buscarPorCobertura(float cobertura)
+{
+    int cantidad = archiPacientes.getCantidadRegistros();
+    Paciente *pacientes;
+
+    pacientes = new Paciente[cantidad];
+
+    if(pacientes == nullptr)
+    {
+        cout << "No hay espacio en memoria." << endl;
+        return;
+    }
+
+    archiPacientes.leerTodos(pacientes, cantidad);
+
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                        INFORMACION DE LOS PACIENTES                           |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+    for(int i=0; i<cantidad; i++)
+    {
+        if(pacientes[i].getPorcCobertura()== cobertura && pacientes[i].getEstado())
+        {
+            cout << "--------------------------------------------------------------------------------" << endl;
+            mostrar(pacientes[i]);
+            cout << "--------------------------------------------------------------------------------"  << endl;
+        }
+    }
+
+    delete [] pacientes;
+}

@@ -16,7 +16,7 @@
 	<conio.h>
 	<windows.h>
 
-1719692675 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
+1719716722 c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.h
 	<iostream>
 	<locale.h>
 	<cstring>
@@ -170,18 +170,20 @@
 	"EstadoTurno.h"
 	"EstadoTurnoArchivo.h"
 
-1719238951 c:\users\marina_chavez\desktop\gestionturnosg60\pacientearchivo.h
+1719718624 c:\users\marina_chavez\desktop\gestionturnosg60\pacientearchivo.h
 	"Paciente.h"
 
-1719238956 c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.h
+1719720540 c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.h
 	"Paciente.h"
 	"PacienteArchivo.h"
+	"Utils.h"
 
-1719536857 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientearchivo.cpp
+1719718795 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientearchivo.cpp
 	<iostream>
+	<cctype>
 	"PacienteArchivo.h"
 
-1719507292 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
+1719720540 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
 	<iostream>
 	"PacienteManager.h"
 
@@ -205,23 +207,30 @@
 	<iostream>
 	"TurnoArchivo.h"
 
-1719690887 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
+1719708109 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
+	<cstring>
 	"TurnoManager.h"
 	"HorariosProfesionalesArchivo.h"
+	"EspecialidadArchivo.h"
 	"PacienteArchivo.h"
 	"ProfesionalArchivo.h"
+	"Utils.h"
 
 1719489177 c:\users\marina_chavez\desktop\gestionturnosg60\turnoarchivo.h
 	"Turno.h"
 
-1719690234 c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.h
+1719707335 c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.h
 	"Turno.h"
 	"TurnoArchivo.h"
 
-1719613222 c:\users\marina_chavez\desktop\gestionturnosg60\utils.h
+1719716913 c:\users\marina_chavez\desktop\gestionturnosg60\utils.h
+	<iostream>
+	<string>
+	<algorithm>
+	<cctype>
 
 1719599980 source:c:\users\marina_chavez\desktop\gestionturnosg60\loginarchivo.cpp
 	<iostream>
@@ -236,11 +245,20 @@
 	<iostream>
 	"LoginManager.h"
 
-1719602306 c:\users\marina_chavez\desktop\gestionturnosg60\loginmanager.h
+1719707874 c:\users\marina_chavez\desktop\gestionturnosg60\loginmanager.h
+	<iostream>
+	<cstring>
 	"Login.h"
 	"LoginArchivo.h"
 
 1719600734 source:c:\users\marina_chavez\desktop\gestionturnosg60\login.cpp
 	<iostream>
 	"Login.h"
+
+1719720526 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
+	"AppManager.h"
+	"Utils.h"
+
+1719716911 source:c:\users\marina_chavez\desktop\gestionturnosg60\utils.cpp
+	"Utils.h"
 

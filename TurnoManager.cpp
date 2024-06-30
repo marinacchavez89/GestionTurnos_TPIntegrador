@@ -1,11 +1,14 @@
 #include <iostream>
 #include <ctime>
 #include <iomanip>
+#include <cstring>
 using namespace std;
 #include "TurnoManager.h"
 #include "HorariosProfesionalesArchivo.h"
+#include "EspecialidadArchivo.h"
 #include "PacienteArchivo.h"
 #include "ProfesionalArchivo.h"
+#include "Utils.h"
 
 Turno TurnoManager::crear()
 {
@@ -95,7 +98,7 @@ void TurnoManager::mostrar(Turno turno)
         cout << "Id especialidad a atenderse: " << turno.getIdEspecialidad() << endl;
         cout << "Consultorio de atención: " << turno.getConsultorio() << endl;
         cout << "Hora del turno: " << turno.getHoraTurno().toString() << endl;
-        cout << "Estado del turno: " << estadoTurnoToString(turno.getIdEstadoTurno()) << endl;
+        cout << "Estado del turno: " << descripEstadoTurno(turno.getIdEstadoTurno()) << endl;
     }
 }
 
@@ -309,7 +312,7 @@ bool TurnoManager::turnoAsignado(Turno turnoAEvaluar)
     return false;
 }
 
-string TurnoManager::estadoTurnoToString(int idEstadoTurno)
+string TurnoManager::descripEstadoTurno(int idEstadoTurno)
 {
     string descripEstadoTurno = "";
     if(idEstadoTurno==0)
@@ -403,54 +406,57 @@ int TurnoManager::obtenerDiaSemana(int dia, int mes, int anio)
     return diaSemana;
 }
 
-string TurnoManager::descripMes(int mesNro){
+string TurnoManager::descripMes(int mesNro)
+{
 
     string descripMes = "";
-    switch(mesNro){
+    switch(mesNro)
+    {
 
-        case 1:
-            descripMes = "Enero";
-            break;
-        case 2:
-            descripMes = "Febrero";
-            break;
-        case 3:
-            descripMes = "Marzo";
-            break;
-        case 4:
-            descripMes = "Abril";
-            break;
-        case 5:
-            descripMes = "Mayo";
-            break;
-        case 6:
-            descripMes = "Junio";
-            break;
-        case 7:
-            descripMes = "Julio";
-            break;
-        case 8:
-            descripMes = "Agosto";
-            break;
-        case 9:
-            descripMes = "Septiembre";
-            break;
-        case 10:
-            descripMes = "Octubre";
-            break;
-        case 11:
-            descripMes = "Noviembre";
-            break;
-        case 12:
-            descripMes = "Diciembre";
-            break;
+    case 1:
+        descripMes = "Enero";
+        break;
+    case 2:
+        descripMes = "Febrero";
+        break;
+    case 3:
+        descripMes = "Marzo";
+        break;
+    case 4:
+        descripMes = "Abril";
+        break;
+    case 5:
+        descripMes = "Mayo";
+        break;
+    case 6:
+        descripMes = "Junio";
+        break;
+    case 7:
+        descripMes = "Julio";
+        break;
+    case 8:
+        descripMes = "Agosto";
+        break;
+    case 9:
+        descripMes = "Septiembre";
+        break;
+    case 10:
+        descripMes = "Octubre";
+        break;
+    case 11:
+        descripMes = "Noviembre";
+        break;
+    case 12:
+        descripMes = "Diciembre";
+        break;
     }
 
     return descripMes;
 
 }
 
-void TurnoManager::recaudacionAnual(int anio){
+void TurnoManager::recaudacionAnual(int anio)
+{
     TurnoArchivo archiTurnos;
     Turno regTurno;
     int cantRegTurnos = archiTurnos.getCantidadRegistros();
@@ -462,17 +468,22 @@ void TurnoManager::recaudacionAnual(int anio){
     float acuRecaudacionMeses[12] = {};
     float acuRecTotal = 0;
 
-    for(int i = 0; i < cantRegTurnos ; i++){
+    for(int i = 0; i < cantRegTurnos ; i++)
+    {
         regTurno = archiTurnos.leer(i);
 
-        if(regTurno.getFechaTurno().getAnio() == anio && regTurno.getIdEstadoTurno() == 3){
+        if(regTurno.getFechaTurno().getAnio() == anio && regTurno.getIdEstadoTurno() == 3)
+        {
 
-            for(int j = 0; j < cantRegProfesionales; j++){
+            for(int j = 0; j < cantRegProfesionales; j++)
+            {
                 regProfesional = archiProf.leer(j);
 
-                if(regTurno.getMatricula() == regProfesional.getMatricula() && regProfesional.getEstado()){
+                if(regTurno.getMatricula() == regProfesional.getMatricula() && regProfesional.getEstado())
+                {
 
-                    if(regTurno.getEstado()){
+                    if(regTurno.getEstado())
+                    {
                         acuRecaudacionMeses[regTurno.getFechaTurno().getMes() - 1] += regProfesional.getHonorario();
                         acuRecTotal+=regProfesional.getHonorario();
                     }
@@ -481,14 +492,264 @@ void TurnoManager::recaudacionAnual(int anio){
         }
     }
     cout << endl;
-    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+    cout << "*******************************************************************************" << endl;
+    cout << endl;
+    cout << setw(50) << right << " RECAUDACION ANUAL - AÑO " << anio << endl;
+    cout << endl;
+    cout << "*******************************************************************************" << endl;
+    cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
     cout << setw(10) << left << "MES" << setw(40) << right << "RECAUDACIÓN" << endl;
-    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
 
-    for(int i = 0; i < 12; i++){
+    for(int i = 0; i < 12; i++)
+    {
         cout << setw(10) << left << descripMes(i+1) << setw(30) << right << "$" << acuRecaudacionMeses[i] << endl;
     }
-
-    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
     cout << setw(10) << left << "TOTAL" << setw(30) << right << "$" << acuRecTotal << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
+    cout << endl;
+}
+
+void TurnoManager::cantidadTurnosAsignados()
+{
+    TurnoArchivo archiTurnos;
+    Turno regTurno;
+    int cantRegTurnos = archiTurnos.getCantidadRegistros();
+
+    int contadorEstadoTurnos[5] = {};
+    int totalDeTurnos = 0;
+
+    for(int i = 0; i < cantRegTurnos; i++)
+    {
+        regTurno = archiTurnos.leer(i);
+
+        if(regTurno.getEstado())
+        {
+            contadorEstadoTurnos[regTurno.getIdEstadoTurno()]++;
+            totalDeTurnos++;
+        }
+    }
+    cout << endl;
+    cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+    cout << "*******************************************************************************" << endl;
+    cout << endl;
+    cout << setw(55) << right << " CANTIDAD TOTAL DE TURNOS OTORGADOS"<< endl;
+    cout << endl;
+    cout << "*******************************************************************************" << endl;
+    cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
+    cout << setw(10) << left << "ESTADO DE TURNO" << setw(32) << right << "CANTIDAD" << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
+
+    for(int i = 0; i < 5; i++)
+    {
+        cout << setw(10) << left << descripEstadoTurno(i) << setw(30) << right << contadorEstadoTurnos[i] << endl;
+    }
+
+    cout << "------------------------------------------------------------------------------" << endl;
+    cout << setw(10) << left << "TOTAL" << setw(30) << right << totalDeTurnos << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
+    cout << endl;
+}
+
+void TurnoManager::recaudacionPorProfesional(int matricula)
+{
+    TurnoArchivo archiTurnos;
+    Turno regTurno;
+    int cantRegTurnos = archiTurnos.getCantidadRegistros();
+
+    ProfesionalArchivo archiProf;
+    Profesional regProfesional;
+    int cantRegProfesionales = archiProf.getCantidadRegistros();
+
+    float acuRecaudacionMeses[12] = {};
+    float acuRecTotal = 0;
+
+    string nombreProfesional = "";
+
+    for(int i = 0; i < cantRegTurnos ; i++)
+    {
+        regTurno = archiTurnos.leer(i);
+
+        if(regTurno.getIdEstadoTurno() == 3)
+        {
+
+            for(int j = 0; j < cantRegProfesionales; j++)
+            {
+                regProfesional = archiProf.leer(j);
+
+                if(regTurno.getMatricula() == regProfesional.getMatricula() && regProfesional.getMatricula()== matricula && regProfesional.getEstado())
+                {
+
+                    if(regTurno.getEstado())
+                    {
+                        acuRecaudacionMeses[regTurno.getFechaTurno().getMes() - 1] += regProfesional.getHonorario();
+                        acuRecTotal+=regProfesional.getHonorario();
+                        nombreProfesional = regProfesional.getNombre() + " " + regProfesional.getApellido();
+                    }
+                }
+            }
+        }
+    }
+    int indexProf = archiProf.buscarByMatricula(matricula);
+    if(indexProf == -1)
+    {
+        cout << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << endl;
+        cout << "Error en el cálculo de recaudaciones. Verifique número de matricula." << endl;
+        cout << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << endl;
+        return;
+    }
+    else if(acuRecTotal != 0)
+    {
+        cout << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << "*******************************************************************************" << endl;
+        cout << endl;
+        cout << setw(40) << right << "Profesional: " << nombreProfesional << endl;
+        cout << endl;
+        cout << "*******************************************************************************" << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << setw(10) << left << "MES" << setw(40) << right << "RECAUDACIÓN" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+
+        for(int i = 0; i < 12; i++)
+        {
+            cout << setw(10) << left << descripMes(i+1) << setw(30) << right << "$" << acuRecaudacionMeses[i] << endl;
+        }
+
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << setw(10) << left << "TOTAL" << setw(30) << right << "$" << acuRecTotal << endl;
+        cout << "------------------------------------------------------------------------------" << endl;
+        cout << endl;
+    }
+    else if(acuRecTotal==0)
+    {
+        cout << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << endl;
+        cout << "El profesional no posee recaudación." << endl;
+        cout << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << endl;
+    }
+}
+
+string TurnoManager::descripEspecialidad(int especialidad)
+{
+
+    EspecialidadArchivo archiEspecialidad;
+    int index = archiEspecialidad.buscarByID(especialidad);
+
+    if (index != -1)
+    {
+        Especialidad idEspecialidad = archiEspecialidad.leer(index);
+        return idEspecialidad.getDescripcion();
+    }
+    else
+    {
+        return "Especialidad no encontrada";
+    }
+}
+
+void TurnoManager::recaudacionPorEspecialidad(int idEspecialidad)
+{
+    TurnoArchivo archiTurnos;
+    Turno regTurno;
+    int cantRegTurnos = archiTurnos.getCantidadRegistros();
+
+    ProfesionalArchivo archiProf;
+    Profesional regProfesional;
+    int cantRegProfesionales = archiProf.getCantidadRegistros();
+
+    float acuRecaudacionMeses[12] = {};
+    float acuRecTotal = 0;
+
+    string nombreEspecialidad = descripEspecialidad(idEspecialidad);
+
+    for(int i = 0; i < cantRegTurnos ; i++)
+    {
+        regTurno = archiTurnos.leer(i);
+
+        if(regTurno.getIdEstadoTurno() == 3 && regTurno.getIdEspecialidad() == idEspecialidad)
+        {
+
+            for(int j = 0; j < cantRegProfesionales; j++)
+            {
+                regProfesional = archiProf.leer(j);
+
+                if(regTurno.getMatricula() == regProfesional.getMatricula() && regProfesional.getEstado())
+                {
+
+                    if(regTurno.getEstado())
+                    {
+                        acuRecaudacionMeses[regTurno.getFechaTurno().getMes() - 1] += regProfesional.getHonorario();
+                        acuRecTotal += regProfesional.getHonorario();
+                    }
+                }
+            }
+        }
+    }
+    if(nombreEspecialidad == "Especialidad no encontrada")
+    {
+        cout << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << endl;
+        cout << "Error en el cálculo de recaudaciones. Verifique número de especialidad." << endl;
+        cout << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << endl;
+        return;
+    }
+    else if(acuRecTotal != 0)
+    {
+        cout << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << "*******************************************************************************" << endl;
+        cout << endl;
+        cout << setw(40) << right << "Especialidad: " << nombreEspecialidad << endl;
+        cout << endl;
+        cout << "*******************************************************************************" << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << setw(10) << left << "MES" << setw(40) << right << "RECAUDACIÓN" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+
+        for(int i = 0; i < 12; i++)
+        {
+            cout << setw(10) << left << descripMes(i+1) << setw(30) << right << "$" << acuRecaudacionMeses[i] << endl;
+        }
+
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << setw(10) << left << "TOTAL" << setw(30) << right << "$" << acuRecTotal << endl;
+        cout << "------------------------------------------------------------------------------" << endl;
+        cout << endl;
+    }
+    else if(acuRecTotal == 0)
+    {
+        cout << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << endl;
+        cout << "La especialidad no posee recaudación." << endl;
+        cout << endl;
+        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << endl;
+    }
 }

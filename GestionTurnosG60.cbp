@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 			<Add option="-DCURL_STATICLIB" />
 		</Compiler>
+		<Unit filename="AppManager.cpp" />
 		<Unit filename="AppManager.h" />
 		<Unit filename="Especialidad.cpp" />
 		<Unit filename="Especialidad.h" />
@@ -84,6 +85,7 @@
 		<Unit filename="TurnoArchivo.h" />
 		<Unit filename="TurnoManager.cpp" />
 		<Unit filename="TurnoManager.h" />
+		<Unit filename="Utils.cpp" />
 		<Unit filename="Utils.h" />
 		<Unit filename="funciones.h" />
 		<Unit filename="main.cpp" />
