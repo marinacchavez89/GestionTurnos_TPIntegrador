@@ -12,12 +12,20 @@ int AppManager::menuLogin()
     dibujarEncabezado();
     cout << "********************************************************************************" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
-    cout << "|                                   LOGIN                                       |" << endl;
+    cout << "|                                   LOGIN                                      |" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << "Ingrese Legajo (Solo números)" << endl;
     cin >> legajo;
+    while(!validarIngresoNros(legajo)){
+        cout << "Ingrese Legajo (Solo números)" << endl;
+        cin >> legajo;
+    }
     cout << "Ingrese contraseña" << endl;
     cin >> pass;
+    while(!validarIngresoNros(pass)){
+        cout << "Ingrese contraseña (Solo números)" << endl;
+        cin >> pass;
+    }
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << "********************************************************************************" << endl;
 
@@ -28,6 +36,7 @@ int AppManager::menuLogin()
         cout << "                 Legajo inexistente. Intente logearse nuevamente.               " << endl;
         cout << "********************************************************************************" << endl;
         cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
+        cout << endl;
         system("pause");
         esAdmin = menuLogin();
     }
@@ -55,13 +64,14 @@ int AppManager::menuLogin()
 }
 void AppManager::configurarConsola()
 {
-    // Cambiar el tamaño de la ventana de la consola
+
+     // Cambiar el tamaño de la ventana de la consola
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SMALL_RECT windowSize = {0, 0, 79, 40};
+    SMALL_RECT windowSize = {0, 0, 79, 35};
     SetConsoleWindowInfo(hOut, TRUE, &windowSize);
 
     // Cambiar el tamaño del buffer de la consola
-    COORD bufferSize = {70, 20};
+    COORD bufferSize = {70, 35};
     SetConsoleScreenBufferSize(hOut, bufferSize);
 
     // Cambiar los colores de la consola
@@ -77,6 +87,28 @@ void AppManager::configurarConsola()
     cfi.FontWeight = FW_NORMAL;
     wcscpy(cfi.FaceName, L"Verdanas");      // Fuente a usar
     SetCurrentConsoleFontEx(hOut, FALSE, &cfi);
+
+     // Centrar la ventana de la consola
+    HWND console = GetConsoleWindow();
+    RECT rConsole;
+    GetWindowRect(console, &rConsole); // Obtiene el tamaño de la ventana de la consola
+
+    int consoleWidth = rConsole.right - rConsole.left;
+    int consoleHeight = rConsole.bottom - rConsole.top;
+
+    RECT rDesktop;
+    const HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &rDesktop); // Obtiene el tamaño de la pantalla
+
+    int screenWidth = rDesktop.right;
+    int screenHeight = rDesktop.bottom;
+
+    // Calcula la posición para centrar la ventana de la consola
+    int posX = (screenWidth - consoleWidth) / 2;
+    int posY = (screenHeight - consoleHeight) / 2;
+
+    // Mueve la ventana de la consola al centro de la pantalla
+    MoveWindow(console, posX, posY, consoleWidth, consoleHeight, TRUE);
 }
 void AppManager::dibujarEncabezado()
 {
@@ -85,16 +117,16 @@ void AppManager::dibujarEncabezado()
 
     // Dibuja un borde
     for(int i = 0; i < 80; ++i)
-        std::cout << "-";
-    std::cout << std::endl;
+    cout << "-";
+    cout << endl;
 
     // Dibuja el contenido
-    std::cout << "|                              GESTIÓN DE TURNOS                               |" << std::endl;
+    cout << "|                              GESTIÓN DE TURNOS                               |" << endl;
 
     // Dibuja un borde
     for(int i = 0; i < 80; ++i)
-        std::cout << "-";
-    std::cout << std::endl;
+    cout << "-";
+    cout << endl;
 }
 void AppManager::dibujarAdios()
 {
@@ -135,20 +167,43 @@ void AppManager::menuABMUsuarios()
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
-        cout << "Opcion: "<< endl;
+        cout << "Opción: "<< endl;
         cin >> opcionUsuarios;
+
+        while(!validarIngresoNros(opcionUsuarios)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionUsuarios;
+        }
 
         switch(opcionUsuarios)
         {
         case 1:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                                 ALTA USUARIO                                 |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerLogin.agregar();
             system("pause");
             break;
         case 2:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                              MODIFICAR URUARIO                               |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerLogin.modificar();
             system("pause");
             break;
         case 3:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                              ELIMINAR USUARIO                                |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerLogin.eliminar();
             system("pause");
             break;
@@ -187,20 +242,42 @@ void AppManager::menuABMTurnos()
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
-        cout << "Opcion: "<< endl;
+        cout << "Opción: "<< endl;
         cin >> opcionTurnos;
+        while(!validarIngresoNros(opcionTurnos)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionTurnos;
+        }
 
         switch(opcionTurnos)
         {
         case 1:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                                 ALTA TURNO                                   |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerTurno.agregar();
             system("pause");
             break;
         case 2:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                               MODIFICAR TURNO                                |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerTurno.modificar();
             system("pause");
             break;
         case 3:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                                ELIMINAR TURNO                                |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerTurno.eliminar();
             system("pause");
             break;
@@ -209,14 +286,32 @@ void AppManager::menuABMTurnos()
             system("pause");
             break;
         case 5:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                              ALTA ESTADO TURNO                               |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerEstadoTurnos.agregar();
             system("pause");
             break;
         case 6:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                           MODIFICAR ESTADO TURNO                             |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerEstadoTurnos.modificar();
             system("pause");
             break;
         case 7:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                           ELIMINAR ESTADO TURNO                              |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerEstadoTurnos.eliminar();
             system("pause");
             break;
@@ -248,33 +343,51 @@ void AppManager::menuABMProfesionales()
         cout << "2  - Modificar profesional" << endl;
         cout << "3  - Eliminar profesional" << endl;
         cout << "4  - Listar profesionales" << endl;
-        cout << "5  - xxxxxxxxxxxxxx" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
-        cout << "Opcion: "<< endl;
+        cout << "Opción: "<< endl;
         cin >> opcionProfesionales;
+        while(!validarIngresoNros(opcionProfesionales)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionProfesionales;
+        }
 
         switch(opcionProfesionales)
         {
         case 1:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                               ALTA PROFESIONAL                               |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerProfesional.agregar();
             system("pause");
             break;
         case 2:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                            MODIFICAR PROFESIONAL                             |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerProfesional.modificar();
             system("pause");
             break;
         case 3:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                            ELIMINAR PROFESIONAL                              |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerProfesional.eliminar();
             system("pause");
             break;
         case 4:
             managerProfesional.listar();
             system("pause");
-            break;
-        case 5:
-            //Llamar a la funcion correspondiente.
             break;
         case 0:
             return;
@@ -283,7 +396,7 @@ void AppManager::menuABMProfesionales()
             break;
         }
     }
-    while(opcionProfesionales >= 0 || opcionProfesionales <= 5);
+    while(opcionProfesionales >= 0 || opcionProfesionales <= 4);
 
 }
 void AppManager::menuABMPacientes()
@@ -300,33 +413,51 @@ void AppManager::menuABMPacientes()
         cout << "2  - Modificar paciente" << endl;
         cout << "3  - Eliminar paciente" << endl;
         cout << "4  - Listar paciente" << endl;
-        cout << "5  - xxxxxxxxxxxxxx" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
-        cout << "Opcion: "<< endl;
+        cout << "Opción: "<< endl;
         cin >> opcionPacientes;
+        while(!validarIngresoNros(opcionPacientes)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionPacientes;
+        }
 
         switch(opcionPacientes)
         {
         case 1:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                                 ALTA PACIENTE                                |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerPaciente.agregar();
             system("pause");
             break;
         case 2:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                              MODIFICAR PACIENTE                              |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerPaciente.modificar();
             system("pause");
             break;
         case 3:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                               ELIMINAR PACIENTE                              |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerPaciente.eliminar();
             system("pause");
             break;
         case 4:
             managerPaciente.listar();
             system("pause");
-            break;
-        case 5:
-            //Llamar a la funcion correspondiente.
             break;
         case 0:
             return;
@@ -335,7 +466,7 @@ void AppManager::menuABMPacientes()
             break;
         }
     }
-    while(opcionPacientes >= 0 || opcionPacientes <= 5);
+    while(opcionPacientes >= 0 || opcionPacientes <= 4);
 
 }
 void AppManager::menuABMEspecialidades()
@@ -352,33 +483,51 @@ void AppManager::menuABMEspecialidades()
         cout << "2  - Modificar especialidad" << endl;
         cout << "3  - Eliminar especialidad" << endl;
         cout << "4  - Listar especialidades" << endl;
-        cout << "5  - xxxxxxxxxxxxxx" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
-        cout << "Opcion: "<< endl;
+        cout << "Opción: "<< endl;
         cin >> opcionEspecialidades;
+        while(!validarIngresoNros(opcionEspecialidades)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionEspecialidades;
+        }
+
 
         switch(opcionEspecialidades)
         {
         case 1:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                               ALTA ESPECIALIDAD                              |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerEspecialidad.agregar();
             system("pause");
             break;
         case 2:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                            MODIFICAR ESPECIALIDAD                            |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerEspecialidad.modificar();
             system("pause");
             break;
         case 3:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                            ELIMINAR ESPECIALIDAD                             |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerEspecialidad.eliminar();
             system("pause");
             break;
         case 4:
             managerEspecialidad.listar();
-            system("pause");
-            break;
-        case 5:
-            //Llamar a la funcion correspondiente.
             system("pause");
             break;
         case 0:
@@ -388,7 +537,7 @@ void AppManager::menuABMEspecialidades()
             break;
         }
     }
-    while(opcionEspecialidades >= 0 || opcionEspecialidades <= 5);
+    while(opcionEspecialidades >= 0 || opcionEspecialidades <= 4);
 
 }
 void AppManager::menuABMAgendaProfesionales()
@@ -406,33 +555,51 @@ void AppManager::menuABMAgendaProfesionales()
         cout << "2  - Modificar horario" << endl;
         cout << "3  - Eliminar horario" << endl;
         cout << "4  - Listar horarios" << endl;
-        cout << "5  - xxxxxxxxxxxxxx" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
         cout << "Opcion: "<< endl;
         cin >> opcionAgenda;
+        while(!validarIngresoNros(opcionAgenda)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionAgenda;
+        }
 
         switch(opcionAgenda)
         {
         case 1:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                                  ALTA HORARIO                                |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerHorariosProf.agregar();
             system("pause");
             break;
         case 2:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                              MODIFICAR HORARIO                               |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerHorariosProf.modificar();
             system("pause");
             break;
         case 3:
+            system("cls");
+            cout << "********************************************************************************" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "|                              ELIMINAR HORARIO                                |" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
+            cout << "********************************************************************************" << endl;
             managerHorariosProf.eliminar();
             system("pause");
             break;
         case 4:
             managerHorariosProf.listar();
             system("pause");
-            break;
-        case 5:
-            //Llamar a la funcion correspondiente.
             break;
         case 0:
             return;
@@ -441,7 +608,7 @@ void AppManager::menuABMAgendaProfesionales()
             break;
         }
     }
-    while(opcionAgenda >= 0 || opcionAgenda <= 5);
+    while(opcionAgenda >= 0 || opcionAgenda <= 4);
 
 }
 void AppManager::menuConsultasPacientes()
@@ -462,6 +629,10 @@ void AppManager::menuConsultasPacientes()
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
         cout << "Opcion: "<< endl;
         cin >> opcionPacientesConsultas;
+        while(!validarIngresoNros(opcionPacientesConsultas)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionPacientesConsultas;
+        }
 
         switch(opcionPacientesConsultas)
         {
@@ -471,6 +642,10 @@ void AppManager::menuConsultasPacientes()
                 int dni;
                 cout << "Ingrese el DNI del paciente." << endl;
                 cin >> dni;
+                while(!validarIngresoNros(dni)){
+                    cout << "Ingrese DNI del paciente (solo números): " << endl;
+                    cin >> dni;
+                }
                 managerPaciente.buscarByDni(dni);
                 cout << endl;
                 system("pause");
@@ -481,7 +656,7 @@ void AppManager::menuConsultasPacientes()
                 system("cls");
                 cin.ignore();
                 string apellido;
-                cout << "Ingrese el apellido del paciente." << endl;
+                cout << "Ingrese el apellido del paciente: " << endl;
                 getline(cin, apellido);
                 string apellidoMayus = toUpperCase(apellido);
                 managerPaciente.buscarPorApellido(apellidoMayus);
@@ -495,8 +670,12 @@ void AppManager::menuConsultasPacientes()
             {
                 system("cls");
                 int cobertura;
-                cout << "Ingrese la cobertura que desea buscar." << endl;
+                cout << "Ingrese la cobertura que desea buscar: " << endl;
                 cin >> cobertura;
+                while(!validarIngresoNros(cobertura)){
+                    cout << "Ingrese la cobertura que desea buscar (solo números): " << endl;
+                    cin >> cobertura;
+                }
                 managerPaciente.buscarPorCobertura(cobertura);
                 cout << endl;
                 system("pause");
@@ -531,6 +710,10 @@ void AppManager::menuConsultasProfesionales()
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
         cout << "Opcion: "<< endl;
         cin >> opcionProfesionalesConsultas;
+        while(!validarIngresoNros(opcionProfesionalesConsultas)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionProfesionalesConsultas;
+        }
 
         switch(opcionProfesionalesConsultas)
         {
@@ -538,8 +721,12 @@ void AppManager::menuConsultasProfesionales()
             {
                 system("cls");
                 int matricula;
-                cout << "Ingrese la matricula del profesional:" << endl;
+                cout << "Ingrese la matricula del profesional: " << endl;
                 cin >> matricula;
+                while(!validarIngresoNros(matricula)){
+                    cout << "Ingrese matricula del profesional (solo números): " << endl;
+                    cin >> matricula;
+                }
                 managerProfesional.buscarByMatricula(matricula);
                 cout << endl;
                 system("pause");
@@ -550,7 +737,7 @@ void AppManager::menuConsultasProfesionales()
                 system("cls");
                 cin.ignore();
                 string apellido;
-                cout << "Ingrese el apellido del profesional:" << endl;
+                cout << "Ingrese el apellido del profesional: " << endl;
                 getline(cin, apellido);
                 string apellidoMayus = toUpperCase(apellido);
                 managerProfesional.buscarPorApellido(apellidoMayus);
@@ -565,8 +752,12 @@ void AppManager::menuConsultasProfesionales()
                 system("cls");
                 cin.ignore();
                 int especialidad;
-                cout << "Ingrese el ID de la especialidad del profesional:" << endl;
+                cout << "Ingrese el ID de la especialidad del profesional: " << endl;
                 cin >> especialidad;
+                while(!validarIngresoNros(especialidad)){
+                    cout << "Ingrese el ID de la especialidad del profesinal (solo números): " << endl;
+                    cin >> especialidad;
+                }
                 managerProfesional.buscarPorEspecialidad(especialidad);
                 cout << endl;
                 system("pause");
@@ -598,8 +789,12 @@ void AppManager::menuConsultasTurnos()
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
         cout << "0  - VOLVER MENU PRINCIPAL" << endl;
-        cout << "Opcion: "<< endl;
+        cout << "Opción: "<< endl;
         cin >> opcionTurnosConsultas;
+        while(!validarIngresoNros(opcionTurnosConsultas)){
+        cout << "Ingrese opción (solo números): " << endl;
+        cin >> opcionTurnosConsultas;
+        }
 
         switch(opcionTurnosConsultas)
         {
@@ -633,9 +828,14 @@ void AppManager::menuConsultasTurnos()
             system("cls");
             cin.ignore();
             int idEstadoTurno;
-            cout << "Ingrese el ID del estado de turno que desea consultar" << endl;
+            cout << "Ingrese el ID del estado de turno que desea consultar." << endl;
             cout << "(0: Libre - 1: Otorgado - 2: En curso - 3: Finalizado - 4: Cancelado): " << endl;
             cin >> idEstadoTurno;
+            while(!validarIngresoNros(idEstadoTurno)){
+                cout << "Ingrese el ID del estado de turno que desea consultar." << endl;
+                cout << "(0: Libre - 1: Otorgado - 2: En curso - 3: Finalizado - 4: Cancelado): " << endl;
+                cin >> idEstadoTurno;
+            }
             managerTurno.consultaPorEstadoTurno(idEstadoTurno);
             cout << endl;
             system("pause");
@@ -682,7 +882,7 @@ void AppManager::menuPrincipal()
         {
             cout << "********************************************************************************" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
-            cout << "|                             MENU ADMINISTRATIVO                               |" << endl;
+            cout << "|                             MENU ADMINISTRATIVO                              |" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "1  - Administrar turnos" << endl;
             cout << "2  - Administrar profesionales" << endl;
@@ -713,8 +913,12 @@ void AppManager::menuPrincipal()
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "********************************************************************************" << endl;
             cout << "0  - SALIR" << endl;
-            cout << "Opcion: "<< endl;
+            cout << "Opción: "<< endl;
             cin >> opcion;
+            while(!validarIngresoNros(opcion)){
+                cout << "Ingrese opción (solo números): " << endl;
+                cin >> opcion;
+            }
         }
 
         if(esAdmin==1)
@@ -753,6 +957,10 @@ void AppManager::menuPrincipal()
                 int anio;
                 cout << "Ingrese el año que desea consultar su recaudación anual: " << endl;
                 cin >> anio;
+                while(!validarIngresoNros(anio)){
+                    cout << "Ingrese el año que desea consultar (solo números): " << endl;
+                    cin >> anio;
+                }
                 system("cls");
                 managerTurno.recaudacionAnual(anio);
                 system("pause");
@@ -762,6 +970,10 @@ void AppManager::menuPrincipal()
                 int matricula;
                 cout << "Ingrese la matricula del profesional que desea consultar la recaudación: " << endl;
                 cin >> matricula;
+                while(!validarIngresoNros(matricula)){
+                    cout << "Ingrese la matricula del profesional que desea consultar (solo números): " << endl;
+                    cin >> matricula;
+                }
                 system("cls");
                 managerTurno.recaudacionPorProfesional(matricula);
                 system("pause");
@@ -771,6 +983,10 @@ void AppManager::menuPrincipal()
                 int idEspecialidad;
                 cout << "Ingrese el ID de la especialidad que desea consultar la recaudación: " << endl;
                 cin >> idEspecialidad;
+                while(!validarIngresoNros(idEspecialidad)){
+                    cout << "Ingrese el ID de la especialidad (solo números): " << endl;
+                    cin >> idEspecialidad;
+                }
                 system("cls");
                 managerTurno.recaudacionPorEspecialidad(idEspecialidad);
                 system("pause");

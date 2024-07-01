@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "EstadoTurnoManager.h"
+#include "Utils.h"
 
 EstadoTurno EstadoTurnoManager::crear(){
     int idEstadoTurno;
@@ -8,6 +9,10 @@ EstadoTurno EstadoTurnoManager::crear(){
 
     cout << "ID estado del turno: ";
     cin >> idEstadoTurno;
+    while(!validarIngresoNros(idEstadoTurno)){
+        cout << "ID estado del turno: ";
+        cin >> idEstadoTurno;
+    }
 
     cout << "Descripción: ";
     cin.ignore();
@@ -60,6 +65,12 @@ void EstadoTurnoManager::agregar()
 
 void EstadoTurnoManager::listar()
 {
+    system("cls");
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                           LISTADO ESTADO TURNO                               |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
     int cantidad = archiEstadoTurno.getCantidadRegistros();
     EstadoTurno *estadoTurnos;
 
@@ -77,9 +88,8 @@ void EstadoTurnoManager::listar()
     {
         if(estadoTurnos[i].getEstado())
         {
-            cout << "--------------------------" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
             mostrar(estadoTurnos[i]);
-            cout << "--------------------------" << endl;
         }
     }
 
@@ -92,6 +102,10 @@ void EstadoTurnoManager::modificar()
 
     cout << "Ingrese el número de ID a modificar: ";
     cin >> idEstadoTurno;
+    while(!validarIngresoNros(idEstadoTurno)){
+        cout << "Ingrese el número de ID a modificar: ";
+        cin >> idEstadoTurno;
+    }
 
     index = archiEstadoTurno.buscarByID(idEstadoTurno);
 
@@ -123,6 +137,10 @@ void EstadoTurnoManager::eliminar()
 
     cout << "Ingrese el ID del estado del turno a eliminar: ";
     cin >> idEstadoTurno;
+    while(!validarIngresoNros(idEstadoTurno)){
+        cout << "Ingrese el ID del estado del turno a eliminar: ";
+        cin >> idEstadoTurno;
+    }
 
     index = archiEstadoTurno.buscarByID(idEstadoTurno);
 

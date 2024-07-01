@@ -1,18 +1,31 @@
 #include <iostream>
 using namespace std;
 #include "LoginManager.h"
+#include "Utils.h"
 
 Login LoginManager::crear(){
     int legajo, user, pass;
 
     cout << "Legajo: ";
     cin >> legajo;
+    while(!validarIngresoNros(legajo)){
+        cout << "Legajo (solo números): ";
+        cin >> legajo;
+    }
 
     cout << "User que tendrá el usuario (1: Admin - 2: User): ";
     cin >> user;
+    while(!validarIngresoNros(user)){
+        cout << "User que tendrá el usuario (1: Admin - 2: User): ";
+        cin >> user;
+    }
 
-    cout << "Contraseña (Solo números): ";
+    cout << "Contraseña: ";
     cin >> pass;
+    while(!validarIngresoNros(pass)){
+        cout << "Contraseña (solo números): ";
+        cin >> pass;
+    }
 
     return Login(legajo, user, pass, true);
 
@@ -77,14 +90,19 @@ void LoginManager::listar()
     }
 
     archiLogin.leerTodos(logines, cantidad);
+    system("cls");
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                              LISTADO USUARIOS                                |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
 
     for(int i=0; i<cantidad; i++)
     {
         if(logines[i].getEstado())
         {
-            cout << "--------------------------" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
             mostrar(logines[i]);
-            cout << "--------------------------" << endl;
         }
     }
 
@@ -125,13 +143,17 @@ Login LoginManager::listar(int legajo)
 
 void LoginManager::modificar()
 {
-    int user, index;
+    int legajo, index;
     Login login;
 
-    cout << "Ingrese el número de usuario: ";
-    cin >> user;
+    cout << "Ingrese el número de legajo del usuario a modificar: ";
+    cin >> legajo;
+    while(!validarIngresoNros(legajo)){
+        cout << "Ingrese el número de usuario (solo números): ";
+        cin >> legajo;
+    }
 
-    index = archiLogin.buscarByLegajo(user);
+    index = archiLogin.buscarByLegajo(legajo);
 
     if(index != -1)
     {
@@ -149,20 +171,24 @@ void LoginManager::modificar()
     }
     else
     {
-        cout << "No se encuentra el Usuario ingresado." << endl;
+        cout << "No se encuentra el usuario ingresado." << endl;
     }
 }
 
 void LoginManager::eliminar()
 {
-    int user, index;
+    int legajo, index;
     Login login;
     char eliminar;
 
-    cout << "Ingrese el número de usuario a eliminar: ";
-    cin >> user;
+    cout << "Ingrese el número de legajo del usuario a eliminar: ";
+    cin >> legajo;
+    while(!validarIngresoNros(legajo)){
+        cout << "Legajo a eliminar (solo números): ";
+        cin >> legajo;
+    }
 
-    index = archiLogin.buscarByLegajo(user);
+    index = archiLogin.buscarByLegajo(legajo);
 
     if(index != -1)
     {

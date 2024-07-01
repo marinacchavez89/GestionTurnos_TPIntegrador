@@ -9,6 +9,10 @@ Especialidad EspecialidadManager::crear(){
 
     cout << "ID Especialidad: ";
     cin >> idEspecialidad;
+    while(!validarIngresoNros(idEspecialidad)){
+        cout << "ID Especialidad: ";
+        cin >> idEspecialidad;
+    }
 
     cout << "Descripción: ";
     cin.ignore();
@@ -24,7 +28,6 @@ void EspecialidadManager::cargar(Especialidad &espe) {
 
     cout << "ID Especialidad: ";
     cin >> idEspecialidad;
-
     espe.setIdEspecialidad(idEspecialidad);
 
     cout << "Descripción: ";
@@ -75,14 +78,19 @@ void EspecialidadManager::listar()
     }
 
     archiEspe.leerTodos(especialidades, cantidad);
+    system("cls");
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                            LISTADO ESPECIALIDADES                            |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
 
     for(int i=0; i<cantidad; i++)
     {
         if(especialidades[i].getEstado())
         {
-            cout << "--------------------------" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
             mostrar(especialidades[i]);
-            cout << "--------------------------" << endl;
         }
     }
 
@@ -94,8 +102,12 @@ void EspecialidadManager::modificar()
     int idEspecialidad, index;
     Especialidad especialidad;
 
-    cout << "Ingrese el número de ID a modificar: ";
+    cout << "Ingrese el ID de la especialidad a modificar: ";
     cin >> idEspecialidad;
+    while(!validarIngresoNros(idEspecialidad)){
+        cout << "Ingrese el ID de la especialidad a modificar: ";
+        cin >> idEspecialidad;
+    }
 
     index = archiEspe.buscarByID(idEspecialidad);
 
@@ -127,6 +139,10 @@ void EspecialidadManager::eliminar()
 
     cout << "Ingrese el ID de la especialidad a eliminar: ";
     cin >> idEspecialidad;
+    while(!validarIngresoNros(idEspecialidad)){
+        cout << "Ingrese el ID de la especialidad a eliminar: ";
+        cin >> idEspecialidad;
+    }
 
     index = archiEspe.buscarByID(idEspecialidad);
 

@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 #include "PacienteManager.h"
+#include "Utils.h"
 
 Paciente PacienteManager::crear(){
 
@@ -12,6 +13,10 @@ Paciente PacienteManager::crear(){
 
     cout << "DNI: ";
     cin >> dni;
+    while(!validarIngresoNros(dni)){
+        cout << "DNI (solo números):";
+        cin >> dni;
+    }
 
     cout << "Nombre: ";
     cin.ignore();
@@ -25,6 +30,10 @@ Paciente PacienteManager::crear(){
 
     cout << "Edad: ";
     cin >> edad;
+    while(!validarIngresoNros(edad)){
+        cout << "Edad (solo números):";
+        cin >> edad;
+    }
 
     cout << "Direccion: ";
     cin.ignore();
@@ -38,9 +47,17 @@ Paciente PacienteManager::crear(){
 
     cout << "Porcentaje de cobertura: ";
     cin >> porcCobertura;
+    while(!validarIngresoNros(porcCobertura)){
+        cout << "Porcentaje de cobertura (solo números):";
+        cin >> porcCobertura;
+    }
 
     cout << "Número de historia clínica: ";
     cin >> nroHistoriaClinica;
+    while(!validarIngresoNros(nroHistoriaClinica) || nroHistoriaClinica < 0){
+        cout << "Número de historia clínica (solo números):";
+        cin >> nroHistoriaClinica;
+    }
 
     cout << "Email: ";
     cin.ignore();
@@ -158,13 +175,19 @@ void PacienteManager::listar()
 
     archiPacientes.leerTodos(pacientes, cantidad);
 
+    system("cls");
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                              LISTADO PACIENTES                               |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+
     for(int i=0; i<cantidad; i++)
     {
         if(pacientes[i].getEstado())
         {
-            cout << "--------------------------" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
             mostrar(pacientes[i]);
-            cout << "--------------------------" << endl;
         }
     }
 
@@ -178,6 +201,10 @@ void PacienteManager::modificar()
 
     cout << "Ingrese el número de DNI a modificar: ";
     cin >> dni;
+    while(!validarIngresoNros(dni)){
+        cout << "DNI (solo números):";
+        cin >> dni;
+    }
 
     index = archiPacientes.buscarByDni(dni);
 
@@ -209,6 +236,10 @@ void PacienteManager::eliminar()
 
     cout << "Ingrese el DNI del paciente a eliminar: ";
     cin >> dni;
+    while(!validarIngresoNros(dni)){
+        cout << "DNI (solo números):";
+        cin >> dni;
+    }
 
     index = archiPacientes.buscarByDni(dni);
 
@@ -259,6 +290,10 @@ void PacienteManager::buscarByDni(int dni)
         cout << "********************************************************************************" << endl;
         cout << "Ingrese el DNI del paciente: ";
         cin >> dni;
+        while(!validarIngresoNros(dni)){
+        cout << "DNI (solo números):";
+        cin >> dni;
+        }
         pacienteIndex = archiPacientes.buscarByDni(dni);
     }
     system("cls");

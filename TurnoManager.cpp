@@ -18,21 +18,41 @@ Turno TurnoManager::crear()
 
     cout << "ID del turno: ";
     cin >> idTurno;
+    while(!validarIngresoNros(idTurno)){
+        cout << "ID del turno: (solo números):";
+        cin >> idTurno;
+    }
 
     cout << "Fecha del turno: ";
     fechaTurno.cargar();
 
     cout << "Matricula del profesional: ";
     cin >> matricula;
+    while(!validarIngresoNros(matricula)){
+        cout << "Matricula del profesional: (solo números):";
+        cin >> matricula;
+    }
 
     cout << "Dni del paciente: ";
     cin >> dni;
+    while(!validarIngresoNros(dni)){
+        cout << "Dni del paciente (solo números):";
+        cin >> dni;
+    }
 
     cout << "Id especialidad a atenderse: ";
     cin >> idEspecialidad;
+    while(!validarIngresoNros(idEspecialidad)){
+        cout << "Id especialidad a atenderse (solo números):";
+        cin >> idEspecialidad;
+    }
 
     cout << "Consultorio de atención: ";
     cin >> consultorio;
+    while(!validarIngresoNros(consultorio)){
+        cout << "Consultorio de atención (solo números):";
+        cin >> consultorio;
+    }
 
     cout << "Ingrese la hora del turno: ";
     horaTurno.cargar();
@@ -40,6 +60,11 @@ Turno TurnoManager::crear()
     cout << "Ingrese el ID del estado del turno" << endl;
     cout << "(0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
+    while(!validarIngresoNros(idEstadoTurno)){
+        cout << "Ingrese el ID del estado del turno" << endl;
+        cout << "(0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
+        cin >> idEstadoTurno;
+    }
 
     return Turno(idTurno, fechaTurno, matricula, dni, idEspecialidad, consultorio, horaTurno, idEstadoTurno, true);
 }
@@ -178,6 +203,13 @@ void TurnoManager::agregar()
 
 void TurnoManager::listar()
 {
+    system("cls");
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                             LISTADO TURNOS                                   |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
+
     int cantidad = archiTurno.getCantidadRegistros();
     Turno *turnos;
 
@@ -195,9 +227,8 @@ void TurnoManager::listar()
     {
         if(turnos[i].getEstado())
         {
-            cout << "--------------------------" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
             mostrar(turnos[i]);
-            cout << "--------------------------" << endl;
         }
     }
 
@@ -210,6 +241,10 @@ void TurnoManager::modificar()
 
     cout << "Ingrese el número de ID del turno a modificar: ";
     cin >> idTurno;
+    while(!validarIngresoNros(idTurno)){
+        cout << "Ingrese el número de ID del turno a modificar (solo números):";
+        cin >> idTurno;
+    }
 
     index = archiTurno.buscarByID(idTurno);
 
@@ -241,6 +276,10 @@ void TurnoManager::eliminar()
 
     cout << "Ingrese el ID del turno a eliminar: ";
     cin >> idTurno;
+    while(!validarIngresoNros(idTurno)){
+        cout << "Ingrese el número de ID del turno a eliminar (solo números):";
+        cin >> idTurno;
+    }
 
     index = archiTurno.buscarByID(idTurno);
 

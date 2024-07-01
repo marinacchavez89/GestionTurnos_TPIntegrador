@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Fecha.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -56,20 +57,32 @@ void Fecha::cargar()
 {
     cout<<"Ingrese dia: ";
     cin>>Dia;
+    while(!validarIngresoNros(Dia)){
+        cout << "Ingrese dia: ";
+        cin >> Dia;
+    }
     while(Dia<0 || Dia>31 || Dia==0 || Dia ==00){
         cout<<"Dia inválido (01 a 31): ";
         cin>>Dia;
     }
     cout<<"Ingrese mes: ";
     cin>>Mes;
+    while(!validarIngresoNros(Dia)){
+        cout << "Ingrese mes: ";
+        cin >> Mes;
+    }
     while(Mes<=0 || Mes>12){
         cout<<"Mes inválido (01 a 12): ";
         cin>>Mes;
     }
-    cout<<"Ingrese anio: ";
+    cout<<"Ingrese año: ";
     cin>>Anio;
+    while(!validarIngresoNros(Anio)){
+        cout << "Ingrese año: ";
+        cin >> Anio;
+    }
     while(Anio<1900){
-        cout<<"Anio inválido (solo mayor a 1900): ";
+        cout<<"Año inválido (solo mayor a 1900): ";
         cin>>Anio;
     }
 }

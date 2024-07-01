@@ -161,6 +161,12 @@ void ProfesionalManager::agregar()
 
 void ProfesionalManager::listar()
 {
+    system("cls");
+        cout << "********************************************************************************" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "|                            LISTADO PROFESIONALES                             |" << endl;
+        cout << "--------------------------------------------------------------------------------" << endl;
+        cout << "********************************************************************************" << endl;
     int cantidad = archiProf.getCantidadRegistros();
     Profesional *profesionales;
 
@@ -178,9 +184,8 @@ void ProfesionalManager::listar()
     {
         if(profesionales[i].getEstado())
         {
-            cout << "--------------------------" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
             mostrar(profesionales[i]);
-            cout << "--------------------------" << endl;
         }
     }
 

@@ -2,6 +2,7 @@
 #include <cstdlib>
 using namespace std;
 #include "HorariosProfesionalesManager.h"
+#include "Utils.h"
 
 HorariosProfesionales HorariosProfesionalesManager::crear()
 {
@@ -12,9 +13,18 @@ HorariosProfesionales HorariosProfesionalesManager::crear()
 
     cout << "Matricula del Profesional: "<< endl;
     cin >> matricula;
+    while(!validarIngresoNros(matricula)){
+        cout << "Matricula del Profesional (Solo números): ";
+        cin >> matricula;
+    }
 
-    cout << "Dia de atencion (1-7 para Lunes-Domingo): " << endl;
+
+    cout << "Día de atención (1-7 para Lunes-Domingo): " << endl;
     cin >> diaAtencion;
+    while(!validarIngresoNros(diaAtencion)){
+        cout << "Dia de atención (1-7 para Lunes-Domingo) - Solo números: ";
+        cin >> diaAtencion;
+    }
 
     cout << "Hora de Inicio (hh:mm): " << endl;
     horaInicio.cargar();
@@ -24,6 +34,11 @@ HorariosProfesionales HorariosProfesionalesManager::crear()
 
     cout << "Duracion del Turno (minutos): " << endl;
     cin >> duracionTurno;
+    while(!validarIngresoNros(duracionTurno)){
+        cout << "Duracion del Turno (minutos) - Solo números: ";
+        cin >> duracionTurno;
+    }
+
 
     return HorariosProfesionales(matricula, diaAtencion, horaInicio, horaFin, duracionTurno, true);
 
@@ -97,14 +112,19 @@ void HorariosProfesionalesManager::listar()
     }
 
     archiHorarios.leerTodos(horarios, cantidad);
+    system("cls");
+    cout << "********************************************************************************" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "|                               LISTADO HORARIOS                               |" << endl;
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "********************************************************************************" << endl;
 
     for (int i = 0; i < cantidad; i++)
     {
         if(horarios[i].getEstado())
         {
-            cout << "---------------------" << endl;
+            cout << "--------------------------------------------------------------------------------" << endl;
             mostrar(horarios[i]);
-            cout << "---------------------" << endl;
         }
     }
 
@@ -118,6 +138,10 @@ void HorariosProfesionalesManager::modificar()
 
     cout << "Ingrese la matricula del prefesional del horario a modificar: " << endl;
     cin >> matricula;
+    while(!validarIngresoNros(matricula)){
+        cout << "Ingrese la matricula del profesional (Solo números): ";
+        cin >> matricula;
+    }
 
     index = archiHorarios.buscarByMatricula(matricula);
 
@@ -149,6 +173,10 @@ void HorariosProfesionalesManager::eliminar()
     char eliminar;
     cout << "Ingrese la matricula del profesional del horario a eliminar: " << endl;
     cin >> matricula;
+    while(!validarIngresoNros(matricula)){
+        cout << "Ingrese la matricula del profesional (Solo números): ";
+        cin >> matricula;
+    }
 
     index = archiHorarios.buscarByMatricula(matricula);
     if(index != -1)

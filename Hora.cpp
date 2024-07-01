@@ -1,6 +1,7 @@
 #include "Hora.h"
 #include <iostream>
 #include <string>
+#include "Utils.h"
 using namespace std;
 
 /// Constructor por defecto
@@ -36,6 +37,10 @@ void Hora::cargar()
     int horas, minutos;
     cout << "Ingrese hora (Formato - hh):";
     cin >> horas;
+    while(!validarIngresoNros(horas)){
+        cout << "Ingrese hora (Formato: hh - Solo números):";
+        cin >> horas;
+    }
     if(horas >= 0 && horas <= 23)
     {
         setHoras(horas);
@@ -44,11 +49,19 @@ void Hora::cargar()
     {
         cout << "Ingrese hora válida (de 00 a 23):";
         cin >> horas;
+        while(!validarIngresoNros(horas)){
+        cout << "Ingrese hora (Formato: hh - Solo números):";
+        cin >> horas;
+        }
         setHoras(horas);
     }
 
     cout << "Ingrese minutos (Formato - mm):";
     cin >> minutos;
+    while(!validarIngresoNros(minutos)){
+        cout << "Ingrese minutos (Formato: mm - Solo números):";
+        cin >> minutos;
+    }
     if(minutos >=0 && minutos <= 59)
     {
         setMinutos(minutos);
@@ -57,6 +70,10 @@ void Hora::cargar()
     {
         cout << "Ingrese minutos válidos (de 00 a 59):";
         cin >> minutos;
+        while(!validarIngresoNros(minutos)){
+        cout << "Ingrese minutos (Formato: mm - Solo números):";
+        cin >> minutos;
+        }
         setMinutos(minutos);
     }
 

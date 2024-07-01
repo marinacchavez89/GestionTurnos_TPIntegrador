@@ -38,9 +38,10 @@
 	"TurnoArchivo.h"
 	"TurnoManager.h"
 
-1719780843 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
+1719841805 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
 	<iostream>
 	"Fecha.h"
+	"Utils.h"
 
 1719780870 c:\users\marina_chavez\desktop\gestionturnosg60\fecha.h
 	<string>
@@ -54,10 +55,11 @@
 	<cstring>
 	"Fecha.h"
 
-1719509978 source:c:\users\marina_chavez\desktop\gestionturnosg60\hora.cpp
+1719843484 source:c:\users\marina_chavez\desktop\gestionturnosg60\hora.cpp
 	"Hora.h"
 	<iostream>
 	<string>
+	"Utils.h"
 
 1719509302 c:\users\marina_chavez\desktop\gestionturnosg60\hora.h
 	<string>
@@ -136,7 +138,7 @@
 	"ProfesionalArchivo.h"
 	"Utils.h"
 
-1719768095 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.cpp
+1719848465 source:c:\users\marina_chavez\desktop\gestionturnosg60\profesionalmanager.cpp
 	<iostream>
 	"ProfesionalManager.h"
 
@@ -147,7 +149,7 @@
 1719402735 c:\users\marina_chavez\desktop\gestionturnosg60\especialidadarchivo.h
 	"Especialidad.h"
 
-1719533054 source:c:\users\marina_chavez\desktop\gestionturnosg60\especialidadmanager.cpp
+1719848972 source:c:\users\marina_chavez\desktop\gestionturnosg60\especialidadmanager.cpp
 	<iostream>
 	"EspecialidadManager.h"
 	"Utils.h"
@@ -163,9 +165,10 @@
 1719237624 c:\users\marina_chavez\desktop\gestionturnosg60\estadoturnoarchivo.h
 	"EstadoTurno.h"
 
-1719503089 source:c:\users\marina_chavez\desktop\gestionturnosg60\estadoturnomanager.cpp
+1719848231 source:c:\users\marina_chavez\desktop\gestionturnosg60\estadoturnomanager.cpp
 	<iostream>
 	"EstadoTurnoManager.h"
+	"Utils.h"
 
 1719503063 c:\users\marina_chavez\desktop\gestionturnosg60\estadoturnomanager.h
 	"EstadoTurno.h"
@@ -184,9 +187,10 @@
 	<cctype>
 	"PacienteArchivo.h"
 
-1719768192 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
+1719848850 source:c:\users\marina_chavez\desktop\gestionturnosg60\pacientemanager.cpp
 	<iostream>
 	"PacienteManager.h"
+	"Utils.h"
 
 1719536839 source:c:\users\marina_chavez\desktop\gestionturnosg60\horariosprofesionalesarchivo.cpp
 	<iostream>
@@ -195,10 +199,11 @@
 1719246617 c:\users\marina_chavez\desktop\gestionturnosg60\horariosprofesionalesarchivo.h
 	"HorariosProfesionales.h"
 
-1719250858 source:c:\users\marina_chavez\desktop\gestionturnosg60\horariosprofesionalesmanager.cpp
+1719849069 source:c:\users\marina_chavez\desktop\gestionturnosg60\horariosprofesionalesmanager.cpp
 	<iostream>
 	<cstdlib>
 	"HorariosProfesionalesManager.h"
+	"Utils.h"
 
 1719246931 c:\users\marina_chavez\desktop\gestionturnosg60\horariosprofesionalesmanager.h
 	"HorariosProfesionales.h"
@@ -208,7 +213,7 @@
 	<iostream>
 	"TurnoArchivo.h"
 
-1719780380 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
+1719848220 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
@@ -227,11 +232,12 @@
 	"Turno.h"
 	"TurnoArchivo.h"
 
-1719716913 c:\users\marina_chavez\desktop\gestionturnosg60\utils.h
+1719784403 c:\users\marina_chavez\desktop\gestionturnosg60\utils.h
 	<iostream>
 	<string>
 	<algorithm>
 	<cctype>
+	<limits>
 
 1719599980 source:c:\users\marina_chavez\desktop\gestionturnosg60\loginarchivo.cpp
 	<iostream>
@@ -242,9 +248,10 @@
 
 1719600831 c:\users\marina_chavez\desktop\gestionturnosg60\login.h
 
-1719605179 source:c:\users\marina_chavez\desktop\gestionturnosg60\loginmanager.cpp
+1719848684 source:c:\users\marina_chavez\desktop\gestionturnosg60\loginmanager.cpp
 	<iostream>
 	"LoginManager.h"
+	"Utils.h"
 
 1719707874 c:\users\marina_chavez\desktop\gestionturnosg60\loginmanager.h
 	<iostream>
@@ -256,10 +263,10 @@
 	<iostream>
 	"Login.h"
 
-1719780619 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
+1719849364 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
 	"AppManager.h"
 	"Utils.h"
 
-1719716911 source:c:\users\marina_chavez\desktop\gestionturnosg60\utils.cpp
+1719844903 source:c:\users\marina_chavez\desktop\gestionturnosg60\utils.cpp
 	"Utils.h"
 
