@@ -71,7 +71,7 @@ void AppManager::configurarConsola()
     SetConsoleWindowInfo(hOut, TRUE, &windowSize);
 
     // Cambiar el tamaño del buffer de la consola
-    COORD bufferSize = {70, 35};
+    COORD bufferSize = {79, 36};
     SetConsoleScreenBufferSize(hOut, bufferSize);
 
     // Cambiar los colores de la consola
@@ -87,28 +87,6 @@ void AppManager::configurarConsola()
     cfi.FontWeight = FW_NORMAL;
     wcscpy(cfi.FaceName, L"Verdanas");      // Fuente a usar
     SetCurrentConsoleFontEx(hOut, FALSE, &cfi);
-
-     // Centrar la ventana de la consola
-    HWND console = GetConsoleWindow();
-    RECT rConsole;
-    GetWindowRect(console, &rConsole); // Obtiene el tamaño de la ventana de la consola
-
-    int consoleWidth = rConsole.right - rConsole.left;
-    int consoleHeight = rConsole.bottom - rConsole.top;
-
-    RECT rDesktop;
-    const HWND hDesktop = GetDesktopWindow();
-    GetWindowRect(hDesktop, &rDesktop); // Obtiene el tamaño de la pantalla
-
-    int screenWidth = rDesktop.right;
-    int screenHeight = rDesktop.bottom;
-
-    // Calcula la posición para centrar la ventana de la consola
-    int posX = (screenWidth - consoleWidth) / 2;
-    int posY = (screenHeight - consoleHeight) / 2;
-
-    // Mueve la ventana de la consola al centro de la pantalla
-    MoveWindow(console, posX, posY, consoleWidth, consoleHeight, TRUE);
 }
 void AppManager::dibujarEncabezado()
 {
