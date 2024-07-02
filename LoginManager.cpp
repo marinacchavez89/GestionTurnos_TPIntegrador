@@ -15,8 +15,8 @@ Login LoginManager::crear(){
 
     cout << "User que tendrá el usuario (1: Admin - 2: User): ";
     cin >> user;
-    while(!validarIngresoNros(user)){
-        cout << "User que tendrá el usuario (1: Admin - 2: User): ";
+    while(!validarIngresoNros(user) || (user != 1 && user != 2)){
+        cout << "El usuario solo puede ser 1: Admin - 2: User. Ingrese nuevamente: ";
         cin >> user;
     }
 
