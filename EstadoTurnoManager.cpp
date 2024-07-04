@@ -7,10 +7,12 @@ EstadoTurno EstadoTurnoManager::crear(){
     int idEstadoTurno;
     string descripcion;
 
-    cout << "ID estado del turno: ";
+    cout << "Ingrese el ID del estado del turno" << endl;
+    cout << "(1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
-    while(!validarIngresoNros(idEstadoTurno)){
-        cout << "ID estado del turno: ";
+    while(!validarIngresoNros(idEstadoTurno) && idEstadoTurno >=1 && idEstadoTurno <= 4){
+        cout << "Ingrese el ID del estado del turno" << endl;
+        cout << "(1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
         cin >> idEstadoTurno;
     }
 
@@ -25,7 +27,8 @@ void EstadoTurnoManager::cargar(EstadoTurno &estadoTurno) {
     int idEstadoTurno;
     string descripcion;
 
-    cout << "ID estado del turno: ";
+    cout << "Ingrese el ID del estado del turno" << endl;
+    cout << "(1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
     estadoTurno.setIdEstadoTurno(idEstadoTurno);
 

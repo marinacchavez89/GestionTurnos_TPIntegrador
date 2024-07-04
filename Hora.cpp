@@ -35,6 +35,7 @@ void Hora::setMinutos(int minutos)
 void Hora::cargar()
 {
     int horas, minutos;
+    cout << endl;
     cout << "Ingrese hora (Formato - hh):";
     cin >> horas;
     while(!validarIngresoNros(horas)){

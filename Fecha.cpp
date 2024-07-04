@@ -55,6 +55,7 @@ string Fecha::toString()
 
 void Fecha::cargar()
 {
+    cout << endl;
     cout<<"Ingrese dia: ";
     cin>>Dia;
     while(!validarIngresoNros(Dia)){

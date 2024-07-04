@@ -38,7 +38,7 @@
 	"TurnoArchivo.h"
 	"TurnoManager.h"
 
-1719841805 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
+1720063108 source:c:\users\marina_chavez\desktop\gestionturnosg60\fecha.cpp
 	<iostream>
 	"Fecha.h"
 	"Utils.h"
@@ -165,7 +165,7 @@
 1719237624 c:\users\marina_chavez\desktop\gestionturnosg60\estadoturnoarchivo.h
 	"EstadoTurno.h"
 
-1719848231 source:c:\users\marina_chavez\desktop\gestionturnosg60\estadoturnomanager.cpp
+1720060931 source:c:\users\marina_chavez\desktop\gestionturnosg60\estadoturnomanager.cpp
 	<iostream>
 	"EstadoTurnoManager.h"
 	"Utils.h"
@@ -213,7 +213,7 @@
 	<iostream>
 	"TurnoArchivo.h"
 
-1720057740 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
+1720063035 source:c:\users\marina_chavez\desktop\gestionturnosg60\turnomanager.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
@@ -263,7 +263,7 @@
 	<iostream>
 	"Login.h"
 
-1720058706 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
+1720060738 source:c:\users\marina_chavez\desktop\gestionturnosg60\appmanager.cpp
 	"AppManager.h"
 	"Utils.h"
 

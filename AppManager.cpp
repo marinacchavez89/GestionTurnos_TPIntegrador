@@ -806,11 +806,11 @@ void AppManager::menuConsultasTurnos()
             cin.ignore();
             int idEstadoTurno;
             cout << "Ingrese el ID del estado de turno que desea consultar." << endl;
-            cout << "(0: Libre - 1: Otorgado - 2: En curso - 3: Finalizado - 4: Cancelado): " << endl;
+            cout << "(1: Otorgado - 2: En curso - 3: Finalizado - 4: Cancelado): " << endl;
             cin >> idEstadoTurno;
             while(!validarIngresoNros(idEstadoTurno)){
                 cout << "Ingrese el ID del estado de turno que desea consultar." << endl;
-                cout << "(0: Libre - 1: Otorgado - 2: En curso - 3: Finalizado - 4: Cancelado): " << endl;
+                cout << "(1: Otorgado - 2: En curso - 3: Finalizado - 4: Cancelado): " << endl;
                 cin >> idEstadoTurno;
             }
             managerTurno.consultaPorEstadoTurno(idEstadoTurno);

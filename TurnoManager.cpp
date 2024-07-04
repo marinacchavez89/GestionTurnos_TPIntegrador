@@ -58,11 +58,11 @@ Turno TurnoManager::crear()
     horaTurno.cargar();
 
     cout << "Ingrese el ID del estado del turno" << endl;
-    cout << "(0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
+    cout << "(1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
     while(!validarIngresoNros(idEstadoTurno)){
         cout << "Ingrese el ID del estado del turno" << endl;
-        cout << "(0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
+        cout << "(1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
         cin >> idEstadoTurno;
     }
 
@@ -104,7 +104,7 @@ void TurnoManager::cargar(Turno &turno)
     turno.setHoraTurno(horaTurno);
 
     cout << "Ingrese el ID del estado del turno" << endl;
-    cout << "(0: Libre - 1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
+    cout << "(1: otorgado - 2: En Curso - 3: Finalizado - 4: Cancelado): ";
     cin >> idEstadoTurno;
     turno.setIdEstadoTurno(idEstadoTurno);
 
@@ -141,7 +141,9 @@ void TurnoManager::agregar()
     if (nuevoTurno.getFechaTurno() < fechaActual ||
             (nuevoTurno.getFechaTurno() == fechaActual && nuevoTurno.getHoraTurno() < horaActual))
     {
+        cout << endl;
         cout << "La fecha elegida, es una fecha caducada." << endl;
+        cout << endl;
         return;
     }
 
@@ -149,7 +151,9 @@ void TurnoManager::agregar()
     int index = horariosProfesionalArchivo.buscarByMatricula(nuevoTurno.getMatricula());
     if (index == -1)
     {
+        cout << endl;
         cout << "No se encontró el horario del profesional." << endl;
+        cout << endl;
         return;
     }
 
@@ -157,7 +161,9 @@ void TurnoManager::agregar()
     HorariosProfesionales* horariosProfesionales = horariosProfesionalArchivo.buscarTodosByMatricula(nuevoTurno.getMatricula(), cantidadHorarios);
     if (horariosProfesionales == nullptr)
     {
+        cout << endl;
         cout << "No se encontró el horario del profesional." << endl;
+        cout << endl;
         return;
     }
 
@@ -182,7 +188,9 @@ void TurnoManager::agregar()
 
     if (!horarioValido)
     {
+        cout << endl;
         cout << "El profesional no atiende en el horario seleccionado." << endl;
+        cout << endl;
         return;
     }
 
@@ -190,13 +198,14 @@ void TurnoManager::agregar()
     int indexEspe = archiEspe.buscarByID(nuevoTurno.getIdEspecialidad());
 
     if(indexEspe == -1){
+        cout << endl;
         cout << "No se encontró la especialidad. Darla de alta de ser necesario." << endl;
+        cout << endl;
         return;
     }
 
     ProfesionalArchivo archiProf;
     Profesional regProf;
-    int indexProf = archiProf.buscarByMatricula(nuevoTurno.getMatricula());
     int cantRegProf = archiProf.getCantidadRegistros();
 
     bool coincideEspe = false;
@@ -212,7 +221,9 @@ void TurnoManager::agregar()
     }
 
     if(!coincideEspe){
+        cout << endl;
         cout << "El profesional no atiende esa especialidad. Verificar." << endl;
+        cout << endl;
         return;
     }
 
@@ -220,35 +231,48 @@ void TurnoManager::agregar()
     int indexPaciente = pacienteArchivo.buscarByDni(nuevoTurno.getDni());
     if (indexPaciente == -1)
     {
+        cout << endl;
         cout << "No se encontró el paciente. Darlo de alta de ser necesario." << endl;
+        cout << endl;
         return;
     }
 
     if (archiTurno.buscarByID(nuevoTurno.getIdTurno()) != -1)
     {
+        cout << endl;
         cout << "Ya existe el registro. No se puede duplicar." << endl;
+        cout << endl;
         return;
     }
 
     if(turnoAsignado(nuevoTurno))
     {
-        cout << "Turno ya asignado." << endl;
+        cout << endl;
+        cout << "¡Turno ya asignado!" << endl;
+        cout << "Para modificar algún dato del turno debe ir a la opción ´Modificar´ del menu." << endl;
+        cout << endl;
         return;
     }
 
     if (archiTurno.buscarByID(nuevoTurno.getIdTurno()) != -1)
     {
+        cout << endl;
         cout << "Ya existe el registro. No se puede duplicar." << endl;
+        cout << endl;
         return;
     }
 
     if (archiTurno.guardar(nuevoTurno))
     {
+        cout << endl;
         cout << "¡El turno fue agendado con éxito!" << endl;
+        cout << endl;
     }
     else
     {
-        cout << "No se pudo agendar el turno. Turno ya asignado." << endl;
+        cout << endl;
+        cout << "No se pudo agendar el turno." << endl;
+        cout << endl;
     }
 
 
@@ -387,7 +411,7 @@ bool TurnoManager::turnoAsignado(Turno turnoAEvaluar)
 
     for(int i=0; i<cantidad; i++)
     {
-        if(turnos[i].getIdEstadoTurno()==1 && turnos[i].getEstado())
+        if((turnos[i].getIdEstadoTurno()==1 || turnos[i].getIdEstadoTurno()==2) && turnos[i].getEstado())
         {
             if(turnos[i].getFechaTurno() == turnoAEvaluar.getFechaTurno() &&
                     turnos[i].getMatricula() == turnoAEvaluar.getMatricula() &&
@@ -407,10 +431,11 @@ bool TurnoManager::turnoAsignado(Turno turnoAEvaluar)
 string TurnoManager::descripEstadoTurno(int idEstadoTurno)
 {
     string descripEstadoTurno = "";
-    if(idEstadoTurno==0)
+    /*if(idEstadoTurno==0)
     {
         descripEstadoTurno = "Libre";
-    }
+    }*/
+
     if(idEstadoTurno==1)
     {
         descripEstadoTurno = "Otorgado";
@@ -611,7 +636,7 @@ void TurnoManager::cantidadTurnosAsignados()
     Turno regTurno;
     int cantRegTurnos = archiTurnos.getCantidadRegistros();
 
-    int contadorEstadoTurnos[5] = {};
+    int contadorEstadoTurnos[4] = {};
     int totalDeTurnos = 0;
 
     for(int i = 0; i < cantRegTurnos; i++)
@@ -620,7 +645,7 @@ void TurnoManager::cantidadTurnosAsignados()
 
         if(regTurno.getEstado())
         {
-            contadorEstadoTurnos[regTurno.getIdEstadoTurno()]++;
+            contadorEstadoTurnos[regTurno.getIdEstadoTurno()-1]++;
             totalDeTurnos++;
         }
     }
@@ -636,9 +661,9 @@ void TurnoManager::cantidadTurnosAsignados()
     cout << setw(10) << left << "ESTADO DE TURNO" << setw(32) << right << "CANTIDAD" << endl;
     cout << "------------------------------------------------------------------------------" << endl;
 
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 4; i++)
     {
-        cout << setw(10) << left << descripEstadoTurno(i) << setw(30) << right << contadorEstadoTurnos[i] << endl;
+        cout << setw(10) << left << descripEstadoTurno(i+1) << setw(30) << right << contadorEstadoTurnos[i] << endl;
     }
 
     cout << "------------------------------------------------------------------------------" << endl;
@@ -913,7 +938,7 @@ void TurnoManager::consultaPorEstadoTurno(int idEstadoTurno)
     {
         cout << "********************************************************************************" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
-        cout << "|                                 SIN REGISTROS                                 |" << endl;
+        cout << "|                              SIN REGISTROS                                   |" << endl;
         cout << "--------------------------------------------------------------------------------" << endl;
         cout << "********************************************************************************" << endl;
     }
