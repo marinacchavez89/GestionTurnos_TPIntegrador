@@ -431,10 +431,6 @@ bool TurnoManager::turnoAsignado(Turno turnoAEvaluar)
 string TurnoManager::descripEstadoTurno(int idEstadoTurno)
 {
     string descripEstadoTurno = "";
-    /*if(idEstadoTurno==0)
-    {
-        descripEstadoTurno = "Libre";
-    }*/
 
     if(idEstadoTurno==1)
     {

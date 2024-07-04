@@ -44,6 +44,10 @@ Profesional ProfesionalManager::crear(){
 
     cout << "Consultorio: ";
     cin >> consultorio;
+    while(!validarIngresoNros(consultorio)){
+        cout << "Consultorio. Solo nros: ";
+        cin >> consultorio;
+    }
 
 
     cout << "Honorario: ";
