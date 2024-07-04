@@ -88,13 +88,24 @@ void HorariosProfesionalesManager::mostrar(HorariosProfesionales horario)
 
 void HorariosProfesionalesManager::agregar()
 {
-    if(archiHorarios.guardar(crear()))
-    {
-        cout << "¡El horario del profesional fue guardado con éxito!" << endl;
+
+    HorariosProfesionales nuevoHorarioProfesional = crear();
+
+    int indexProf = archiHorarios.buscarByMatricula(nuevoHorarioProfesional.getMatricula());
+    HorariosProfesionales regProf = archiHorarios.leer(indexProf);
+
+    if (regProf.getMatricula() == nuevoHorarioProfesional.getMatricula() &&
+        regProf.getHoraInicio() == nuevoHorarioProfesional.getHoraInicio() &&
+        regProf.getHoraFin() == nuevoHorarioProfesional.getHoraFin() &&
+        regProf.getDiaAtencion() == nuevoHorarioProfesional.getDiaAtencion() && regProf.getEstado()) {
+        cout << "Ya existe el registro. No se puede duplicar." << endl;
+        return;
     }
-    else
-    {
-        cout << "No se pudo guardar el horario del profesional. "<< endl;
+
+    if (archiHorarios.guardar(nuevoHorarioProfesional)) {
+        cout << "¡El horario del profesional fue guardado con éxito!" << endl;
+    } else {
+        cout << "No se pudo guardar el horario del profesional." << endl;
     }
 }
 

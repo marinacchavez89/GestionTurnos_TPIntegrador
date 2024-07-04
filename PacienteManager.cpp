@@ -64,8 +64,8 @@ Paciente PacienteManager::crear(){
     getline(cin, email);
 
 
-    return Paciente(dni, nombre, apellido, fecha, edad, direccion, telefono, genero, true, ///TRUE HACE REFERENCIA AL ESTADO DE PERSONA
-                       porcCobertura, nroHistoriaClinica, email);
+    return Paciente(dni, nombre, apellido, fecha, edad, direccion, telefono, genero, true,
+                       nroHistoriaClinica, porcCobertura, email);
 
 }
 

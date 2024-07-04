@@ -126,3 +126,46 @@ int HorariosProfesionalesArchivo::getCantidadRegistros()
 
     return tam;
 }
+
+HorariosProfesionales* HorariosProfesionalesArchivo::buscarTodosByMatricula(int matricula, int &cantidad)
+{
+    cantidad = 0;
+    HorariosProfesionales reg;
+    FILE *pFile;
+
+    pFile = fopen("horariosProfesionales.dat", "rb");
+    if(pFile == nullptr)
+    {
+        return nullptr;
+    }
+
+    while(fread(&reg, sizeof(HorariosProfesionales), 1, pFile))
+    {
+        if(reg.getMatricula() == matricula && reg.getEstado())
+        {
+            cantidad++;
+        }
+    }
+
+    if(cantidad == 0)
+    {
+        fclose(pFile);
+        return nullptr;
+    }
+
+    HorariosProfesionales* horariosProf = new HorariosProfesionales[cantidad];
+    int index = 0;
+
+    fseek(pFile, 0, SEEK_SET);
+
+    while(fread(&reg, sizeof(HorariosProfesionales), 1, pFile))
+    {
+        if(reg.getMatricula() == matricula && reg.getEstado())
+        {
+            horariosProf[index++] = reg;
+        }
+    }
+
+    fclose(pFile);
+    return horariosProf;
+}

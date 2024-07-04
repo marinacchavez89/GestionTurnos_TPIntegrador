@@ -9,4 +9,5 @@ public:
     void leerTodos(HorariosProfesionales registros[], int cantidad);
     int buscarByMatricula(int matricula);
     int getCantidadRegistros();
+    HorariosProfesionales* buscarTodosByMatricula(int matricula, int &cantidad);
 };

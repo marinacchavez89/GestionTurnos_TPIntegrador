@@ -64,8 +64,7 @@ int AppManager::menuLogin()
 }
 void AppManager::configurarConsola()
 {
-
-     // Cambiar el tamaño de la ventana de la consola
+    // Cambiar el tamaño de la ventana de la consola
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT windowSize = {0, 0, 79, 35};
     SetConsoleWindowInfo(hOut, TRUE, &windowSize);
@@ -879,14 +878,14 @@ void AppManager::menuPrincipal()
             cout << "7  - Recaudación anual" << endl;
             cout << "8  - Recaudación por profesional" << endl;
             cout << "9  - Recaudación por especialidad" << endl;
-            cout << "10 - Cantidad de turnos asignados" << endl;
+            cout << "10 - Cantidad de turnos por estado" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "********************************************************************************" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "|                                MENU CONSULTAS                                |" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "11 - Consulta de pacientes" << endl;
-            cout << "12 - Consulta de Profesionales" << endl;
+            cout << "12 - Consulta de profesionales" << endl;
             cout << "13 - Consulta de turnos" << endl;
             cout << "--------------------------------------------------------------------------------" << endl;
             cout << "********************************************************************************" << endl;

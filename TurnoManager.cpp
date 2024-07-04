@@ -153,15 +153,66 @@ void TurnoManager::agregar()
         return;
     }
 
-    HorariosProfesionales horarioProfesional = horariosProfesionalArchivo.leer(index);
+    int cantidadHorarios = 0;
+    HorariosProfesionales* horariosProfesionales = horariosProfesionalArchivo.buscarTodosByMatricula(nuevoTurno.getMatricula(), cantidadHorarios);
+    if (horariosProfesionales == nullptr)
+    {
+        cout << "No se encontró el horario del profesional." << endl;
+        return;
+    }
+
+    bool horarioValido = false;
     int dia = nuevoTurno.getFechaTurno().getDia();
     int mes = nuevoTurno.getFechaTurno().getMes();
     int anio = nuevoTurno.getFechaTurno().getAnio();
     int diaAValidar = obtenerDiaSemana(dia, mes, anio);
-    if (horarioProfesional.getDiaAtencion() != diaAValidar ||
-            !(horarioProfesional.getHoraInicio() <= nuevoTurno.getHoraTurno() && nuevoTurno.getHoraTurno() <= horarioProfesional.getHoraFin()))
+
+    for (int i = 0; i < cantidadHorarios; i++)
+    {
+        if (horariosProfesionales[i].getDiaAtencion() == diaAValidar &&
+            horariosProfesionales[i].getHoraInicio() <= nuevoTurno.getHoraTurno() &&
+            nuevoTurno.getHoraTurno() <= horariosProfesionales[i].getHoraFin())
+        {
+            horarioValido = true;
+            break;
+        }
+    }
+
+    delete[] horariosProfesionales;
+
+    if (!horarioValido)
     {
         cout << "El profesional no atiende en el horario seleccionado." << endl;
+        return;
+    }
+
+    EspecialidadArchivo archiEspe;
+    int indexEspe = archiEspe.buscarByID(nuevoTurno.getIdEspecialidad());
+
+    if(indexEspe == -1){
+        cout << "No se encontró la especialidad. Darla de alta de ser necesario." << endl;
+        return;
+    }
+
+    ProfesionalArchivo archiProf;
+    Profesional regProf;
+    int indexProf = archiProf.buscarByMatricula(nuevoTurno.getMatricula());
+    int cantRegProf = archiProf.getCantidadRegistros();
+
+    bool coincideEspe = false;
+
+    for(int i = 0; i < cantRegProf; i++){
+
+        regProf = archiProf.leer(i);
+        if(regProf.getMatricula() == nuevoTurno.getMatricula() && regProf.getIdEspecialidad() == nuevoTurno.getIdEspecialidad())
+        {
+            coincideEspe = true;
+        }
+
+    }
+
+    if(!coincideEspe){
+        cout << "El profesional no atiende esa especialidad. Verificar." << endl;
         return;
     }
 
@@ -199,6 +250,8 @@ void TurnoManager::agregar()
     {
         cout << "No se pudo agendar el turno. Turno ya asignado." << endl;
     }
+
+
 }
 
 void TurnoManager::listar()
@@ -575,7 +628,7 @@ void TurnoManager::cantidadTurnosAsignados()
     cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
     cout << "*******************************************************************************" << endl;
     cout << endl;
-    cout << setw(55) << right << " CANTIDAD TOTAL DE TURNOS OTORGADOS"<< endl;
+    cout << setw(55) << right << " CANTIDAD TOTAL DE TURNOS REGISTRADOS"<< endl;
     cout << endl;
     cout << "*******************************************************************************" << endl;
     cout << "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-" << endl;
@@ -843,9 +896,9 @@ void TurnoManager::consultaPorEstadoTurno(int idEstadoTurno)
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << "********************************************************************************" << endl;
 
-    for(int x = 0; x< cantRegTurnos ; x++)
+    for(int i = 0; i< cantRegTurnos ; i++)
     {
-        regTurno = archiTurnos.leer(x);
+        regTurno = archiTurnos.leer(i);
 
         if(regTurno.getEstado() && regTurno.getIdEstadoTurno() == idEstadoTurno)
         {
@@ -865,3 +918,5 @@ void TurnoManager::consultaPorEstadoTurno(int idEstadoTurno)
         cout << "********************************************************************************" << endl;
     }
 }
+
+
